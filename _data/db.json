@@ -1,0 +1,90 @@
+[
+  {
+    "_id": "1",
+    "title": "Event 1",
+    "description": "Description for Event 1",
+    "location": "Location 1",
+    "createdAt": "2024-01-02T12:00:00.000Z",
+    "imageUrl": "http://localhost:3000/_next/image?url=%2Fassets%2Fimages%2FheroReview.jpg&w=1080&q=75",
+    "startDateTime": "2024-01-03T10:00:00.000Z",
+    "endDateTime": "2024-01-03T18:00:00.000Z",
+    "price": "10",
+    "isFree": false,
+    "url": "https://example.com/event1",
+    "category": {
+      "_id": "category_id_1",
+      "name": "Technology"
+    },
+    "organizer": {
+      "_id": "organizer_id_1",
+      "firstName": "John",
+      "lastName": "Doe"
+    }
+  },
+  {
+    "_id": "2",
+    "title": "Event 2",
+    "description": "Description for Event 2",
+    "location": "Location 2",
+    "createdAt": "2024-01-02T13:00:00.000Z",
+    "imageUrl": "http://localhost:3000/_next/image?url=%2Fassets%2Fimages%2FheroReview.jpg&w=1080&q=75",
+    "startDateTime": "2024-01-04T09:00:00.000Z",
+    "endDateTime": "2024-01-04T17:00:00.000Z",
+    "price": "15",
+    "isFree": true,
+    "url": "https://example.com/event2",
+    "category": {
+      "_id": "category_id_2",
+      "name": "Health"
+    },
+    "organizer": {
+      "_id": "organizer_id_2",
+      "firstName": "Alice",
+      "lastName": "Smith"
+    }
+  },
+  {
+    "_id": "1",
+    "title": "Event 1",
+    "description": "Description for Event 1",
+    "location": "Location 1",
+    "createdAt": "2024-01-02T12:00:00.000Z",
+    "imageUrl": "http://localhost:3000/_next/image?url=%2Fassets%2Fimages%2FheroReview.jpg&w=1080&q=75",
+    "startDateTime": "2024-01-03T10:00:00.000Z",
+    "endDateTime": "2024-01-03T18:00:00.000Z",
+    "price": "10",
+    "isFree": false,
+    "url": "https://example.com/event1",
+    "category": {
+      "_id": "category_id_1",
+      "name": "Technology"
+    },
+    "organizer": {
+      "_id": "organizer_id_1",
+      "firstName": "John",
+      "lastName": "Doe"
+    }
+  },
+  {
+    "_id": "2",
+    "title": "Event 2",
+    "description": "Description for Event 2",
+    "location": "Location 2",
+    "createdAt": "2024-01-02T13:00:00.000Z",
+    "imageUrl": "http://localhost:3000/_next/image?url=%2Fassets%2Fimages%2FheroReview.jpg&w=1080&q=75",
+    "startDateTime": "2024-01-04T09:00:00.000Z",
+    "endDateTime": "2024-01-04T17:00:00.000Z",
+    "price": "15",
+    "isFree": true,
+    "url": "https://example.com/event2",
+    "category": {
+      "_id": "category_id_2",
+      "name": "Health"
+    },
+    "organizer": {
+      "_id": "organizer_id_2",
+      "firstName": "Alice",
+      "lastName": "Smith"
+    }
+  }
+]
