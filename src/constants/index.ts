@@ -4,7 +4,7 @@ export const headerLinks = [
     route: "/",
   },
   {
-    label: "Write A Review",
+    label: "Write a Review",
     route: "/review/create",
   },
   {
@@ -33,3 +33,5 @@ export const eventDefaultValues = {
   isFree: false,
   url: "",
 };
+
+export const reviewDefaultValues = {};
