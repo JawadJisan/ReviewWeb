@@ -8,17 +8,42 @@ import { formatDateTime } from "@/lib/utils";
 import { SearchParamProps } from "@/types";
 import Image from "next/image";
 
+const event = {
+  _id: "1",
+  title: "Event 1",
+  description: "Description for Event 1",
+  location: "Location 1",
+  createdAt: "2024-01-02T12:00:00.000Z",
+  imageUrl:
+    "http://localhost:3000/_next/image?url=%2Fassets%2Fimages%2FheroReview.jpg&w=1080&q=75",
+  startDateTime: "2024-01-03T10:00:00.000Z",
+  endDateTime: "2024-01-03T18:00:00.000Z",
+  price: "10",
+  isFree: false,
+  url: "https://example.com/event1",
+  category: {
+    _id: "category_id_1",
+    name: "Technology",
+  },
+  organizer: {
+    _id: "organizer_id_1",
+    firstName: "John",
+    lastName: "Doe",
+  },
+};
+
 const EventDetails = async ({
   params: { id },
   searchParams,
 }: SearchParamProps) => {
-  const event = await getEventById(id);
+  // console.log(id, "ReviewID");
+  // const event = await getEventById(id);
 
-  const relatedEvents = await getRelatedEventsByCategory({
-    categoryId: event.category._id,
-    eventId: event._id,
-    page: searchParams.page as string,
-  });
+  // const relatedEvents = await getRelatedEventsByCategory({
+  //   categoryId: event.category._id,
+  //   eventId: event._id,
+  //   page: searchParams.page as string,
+  // });
 
   return (
     <>
@@ -55,7 +80,7 @@ const EventDetails = async ({
               </div>
             </div>
 
-            <CheckoutButton event={event} />
+            {/* <CheckoutButton event={event} /> */}
 
             <div className="flex flex-col gap-5">
               <div className="flex gap-2 md:gap-3">
@@ -67,12 +92,12 @@ const EventDetails = async ({
                 />
                 <div className="p-medium-16 lg:p-regular-20 flex flex-wrap items-center">
                   <p>
-                    {formatDateTime(event.startDateTime).dateOnly} -{" "}
-                    {formatDateTime(event.startDateTime).timeOnly}
+                    {/* {formatDateTime(event.startDateTime).dateOnly} -{" "} */}
+                    {/* {formatDateTime(event.startDateTime).timeOnly} */}
                   </p>
                   <p>
-                    {formatDateTime(event.endDateTime).dateOnly} -{" "}
-                    {formatDateTime(event.endDateTime).timeOnly}
+                    {/* {formatDateTime(event.endDateTime).dateOnly} -{" "} */}
+                    {/* {formatDateTime(event.endDateTime).timeOnly} */}
                   </p>
                 </div>
               </div>
@@ -92,7 +117,7 @@ const EventDetails = async ({
               <p className="p-bold-20 text-grey-600">What You will Learn:</p>
               <p className="p-medium-16 lg:p-regular-18">{event.description}</p>
               <p className="p-medium-16 lg:p-regular-18 truncate text-primary-500 underline">
-                {event.url}
+                {event?.url}
               </p>
             </div>
           </div>
@@ -103,7 +128,7 @@ const EventDetails = async ({
       <section className="wrapper my-8 flex flex-col gap-8 md:gap-12">
         <h2 className="h2-bold">Related Events</h2>
 
-        <Collection
+        {/* <Collection
           data={relatedEvents?.data}
           emptyTitle="No Review Found"
           emptyStateSubtext="Come back later"
@@ -111,7 +136,7 @@ const EventDetails = async ({
           limit={3}
           page={searchParams.page as string}
           totalPages={relatedEvents?.totalPages}
-        />
+        /> */}
       </section>
     </>
   );
