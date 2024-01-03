@@ -14,7 +14,7 @@ const Header = () => {
             src="/assets/images/newLogos.png"
             width={160}
             height={38}
-            alt="Evently logo"
+            alt="ReviewWeb Logo"
           />
         </Link>
 
