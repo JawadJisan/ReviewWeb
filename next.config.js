@@ -5,6 +5,6 @@ const nextConfig = {};
 
 module.exports = {
   images: {
-    domains: ["localhost"], // Add the localhost domain
+    domains: ["localhost", "hips.hearstapps.com"], // Add the localhost domain
   },
 };

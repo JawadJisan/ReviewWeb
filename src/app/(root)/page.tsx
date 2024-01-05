@@ -8,6 +8,8 @@ import { SearchParamProps } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import reviewData from "../../../_data/db.json";
+import ListingProduct from "@/components/shared/ListingProduct";
+import { useGetListingProductQuery } from "@/redux/api/listingProductAPI";
 
 async function getReviews(): Promise<IEvent[]> {
   const result = await fetch("http://localhost:3000/reviews");
@@ -34,6 +36,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
     <>
       <section className="bg-primary-50 bg-dotted-pattern bg-contain py-5 md:py-10">
         <div className="wrapper grid grid-cols-1 gap-5 md:grid-cols-2 2xl:gap-0">
+          {/* <ListingProduct /> */}
           <div className="flex flex-col justify-center gap-8">
             <h1 className="h1-bold">
               Get Tailored Reviews: Discover Your Perfect Match

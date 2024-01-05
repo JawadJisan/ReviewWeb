@@ -115,6 +115,9 @@ body {
   .h3-bold {
     @apply font-bold text-[28px] leading-[36px] md:text-[36px] md:leading-[44px];
   }
+  .h3-semibold {
+    @apply font-semibold text-[28px] leading-[36px] md:text-[36px] md:leading-[44px];
+  }
 
   .h3-medium {
     @apply font-medium text-[28px] leading-[36px] md:text-[36px] md:leading-[44px];

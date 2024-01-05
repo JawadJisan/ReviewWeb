@@ -8,23 +8,22 @@ import React from "react";
 import { DeleteConfirmation } from "./DeleteConfirmation";
 
 type CardProps = {
-  event: IEvent;
+  list: IEvent;
   hasOrderLink?: boolean;
   hidePrice?: boolean;
 };
 
-const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
-  // console.log(event, "console");
+const NewCard = ({ list, hasOrderLink, hidePrice }: CardProps) => {
+  console.log(list, "listConsole");
   // const { sessionClaims } = auth();
   // const userId = sessionClaims?.userId as string;
-
   // const isEventCreator = userId === event.organizer._id.toString();
 
   return (
     <div className="group relative flex min-h-[380px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg md:min-h-[438px]">
       <Link
-        href={`/review/${event._id}`}
-        style={{ backgroundImage: `url(${event.imageUrl})` }}
+        href={`/review/${list.id}`}
+        style={{ backgroundImage: `url(${list.images[0]})` }}
         // style={{ backgroundImage: `/assets/images/heroReview.jpg` }}
         className="flex-center flex-grow bg-gray-50 bg-cover bg-center text-grey-500"
       />
@@ -49,30 +48,33 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
         {!hidePrice && (
           <div className="flex gap-2">
             <span className="p-semibold-14 w-min rounded-full bg-green-100 px-4 py-1 text-green-60">
-              {event.isFree ? "FREE" : `$${event.price}`}
+              {/* {event.isFree ? "FREE" : `$${event.price}`} */}
+              {`$${list.price}`}
             </span>
             <p className="p-semibold-14 w-min rounded-full bg-grey-500/10 px-4 py-1 text-grey-500 line-clamp-1">
-              {event.category.name}
+              {/* {event.category.name} */}
+              {list.parking}
             </p>
           </div>
         )}
 
         <p className="p-medium-16 p-medium-18 text-grey-500">
-          {formatDateTime(event.startDateTime).dateTime}
+          {/* {formatDateTime(event.startDateTime).dateTime} */}
         </p>
 
-        <Link href={`/review/${event._id}`}>
+        <Link href={`/review/${list.id}`}>
           <p className="p-medium-16 md:p-medium-20 line-clamp-2 flex-1 text-black">
-            {event.title}
+            {list.title}
           </p>
         </Link>
 
         <div className="flex-between w-full">
           <p className="p-medium-14 md:p-medium-16 text-grey-600">
-            {event.organizer.firstName} {event.organizer.lastName}
+            {/* {event.organizer.firstName} {event.organizer.lastName} */}
+            User Name
           </p>
 
-          {hasOrderLink && (
+          {/* {hasOrderLink && (
             <Link href={`/orders?eventId=${event._id}`} className="flex gap-2">
               <p className="text-primary-500">Order Details</p>
               <Image
@@ -82,11 +84,11 @@ const Card = ({ event, hasOrderLink, hidePrice }: CardProps) => {
                 height={10}
               />
             </Link>
-          )}
+          )} */}
         </div>
       </div>
     </div>
   );
 };
 
-export default Card;
+export default NewCard;

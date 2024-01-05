@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 import MenuLink from "./menuLink/menuLink";
 import styles from "./sidebar.module.css";
 import {
@@ -6,11 +7,6 @@ import {
   MdSupervisedUserCircle,
   MdShoppingBag,
   MdAttachMoney,
-  MdWork,
-  MdAnalytics,
-  MdPeople,
-  MdOutlineSettings,
-  MdHelpCenter,
   MdLogout,
 } from "react-icons/md";
 // import { auth, signOut } from "@/app/auth";
@@ -19,7 +15,7 @@ const user = { name: "asfd" };
 
 const menuItems = [
   {
-    title: "Pages",
+    title: "Sections",
     list: [
       {
         title: "Dashboard",
@@ -27,54 +23,29 @@ const menuItems = [
         icon: <MdDashboard />,
       },
       {
-        title: "Users",
-        path: "/dashboard/users",
+        title: "My Listings",
+        path: "/dashboard/myListing",
         icon: <MdSupervisedUserCircle />,
       },
       {
-        title: "Products",
-        path: "/dashboard/products",
+        title: "Favourites",
+        path: "/dashboard/favourites",
         icon: <MdShoppingBag />,
       },
       {
-        title: "Transactions",
-        path: "/dashboard/transactions",
+        title: "Chat",
+        path: "/dashboard/chat",
         icon: <MdAttachMoney />,
       },
-    ],
-  },
-  {
-    title: "Analytics",
-    list: [
       {
-        title: "Revenue",
-        path: "/dashboard/revenue",
-        icon: <MdWork />,
+        title: "Payments",
+        path: "/dashboard/payments",
+        icon: <MdAttachMoney />,
       },
       {
-        title: "Reports",
-        path: "/dashboard/reports",
-        icon: <MdAnalytics />,
-      },
-      {
-        title: "Teams",
-        path: "/dashboard/teams",
-        icon: <MdPeople />,
-      },
-    ],
-  },
-  {
-    title: "User",
-    list: [
-      {
-        title: "Settings",
-        path: "/dashboard/settings",
-        icon: <MdOutlineSettings />,
-      },
-      {
-        title: "Help",
-        path: "/dashboard/help",
-        icon: <MdHelpCenter />,
+        title: "Account Details",
+        path: "/dashboard/accountDetails",
+        icon: <MdAttachMoney />,
       },
     ],
   },
@@ -113,6 +84,9 @@ const Sidebar = async () => {
           // await signOut();
         }}
       >
+        {/* <Button size="lg" asChild className="button w-full sm:w-fit">
+          Log Out
+        </Button> */}
         <button className={styles.logout}>
           <MdLogout />
           Logout
