@@ -17,6 +17,9 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "@/components/ui/carousel";
+import Ratings from "@/components/shared/Ratings";
+import ReviewedBy from "@/components/shared/ReviewedBy";
+import SubmitReview from "@/components/shared/SubmitReview";
 
 const event = {
   _id: "1",
@@ -200,8 +203,11 @@ const EventDetails = ({ params: { id }, searchParams }: SearchParamProps) => {
       </section>
       {/* Admin or Modarator Review Carosel */}
       {/* // 50% on small screens and 33% on larger screens. */}
-      <Carousel>
+      <Carousel className="wrapper">
         <CarouselContent>
+          <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+            <ReviewCarosel />
+          </CarouselItem>
           <CarouselItem className="md:basis-1/2 lg:basis-1/3">
             <ReviewCarosel />
           </CarouselItem>
@@ -213,6 +219,9 @@ const EventDetails = ({ params: { id }, searchParams }: SearchParamProps) => {
           </CarouselItem>
         </CarouselContent>
       </Carousel>
+      <Ratings />
+      <ReviewedBy />
+      <SubmitReview />
       <section className="wrapper my-8 flex flex-col gap-8 md:gap-12">
         <h2 className="h3-bold">Related Reviews</h2>
         {/* <Collection
