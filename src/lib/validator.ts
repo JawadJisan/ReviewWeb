@@ -24,3 +24,7 @@ export const userRegistrationSchema = z.object({
   email: z.string(),
   password: z.string().min(6, "password must be 6 words/numbers"),
 });
+export const userLoginSchema = z.object({
+  userName: z.string(),
+  password: z.string().min(6, "password must be 6 words/numbers"),
+});

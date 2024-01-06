@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
 import {
   Form,
   FormControl,
@@ -38,6 +39,12 @@ export default function Component() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 p-4">
       <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
+        <div className="flex items-center mb-5">
+          <IoArrowBackCircleOutline className="mr-2 h-5 w-5" />
+          <Link href="/">
+            <p className="text-sm">Back</p>
+          </Link>
+        </div>
         <h2 className="text-xl font-semibold">Create your account</h2>
         <p className="mt-2 text-sm text-gray-600">to continue to ReviewWeb</p>
         <div className="mt-6">
