@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/form";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { useSignInMutation } from "@/redux/api/authAPI";
-import { storeUserInfo } from "@/utils/auth.service";
+import { getUserInfo, storeUserInfo } from "@/utils/auth.service";
 
 export default function Component() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -47,7 +47,8 @@ export default function Component() {
 
       if (res?.data?.accessToken) {
         router.push("/");
-        // const { role } = getUserInfo() as any;
+        const { role } = getUserInfo() as any;
+        console.log(role, "userRole");
         // message.success("User logged in successfully");
         // if (role === "customer") {
         //   router.push("/my-profile");
@@ -62,8 +63,6 @@ export default function Component() {
         //   router.push("/team-member/my-profile");
         // }
       }
-
-      // console.log(res, "userResponse");
     } catch (error) {
       setErrorMessage(error?.message);
     }
