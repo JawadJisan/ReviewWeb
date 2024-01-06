@@ -70,7 +70,7 @@ export default function Component() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input placeholder="Username" {...field} type="text" />
+                    <Input placeholder="User Name" {...field} type="text" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

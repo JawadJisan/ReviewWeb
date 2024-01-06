@@ -1,0 +1,17 @@
+export enum tagTypes {
+  user = "user",
+  serviceCategory = "service-category",
+  specialization = "specialization",
+  serviceTeam = "service-team",
+  service = "service",
+  availableService = "available-service",
+  upcomingService = "upcoming-service",
+  teamMember = "team-member",
+  reviewAndRating = "review-and-rating",
+  slots = "slots",
+  booking = "booking",
+  feedback = "feedback",
+  blog = "blog",
+  faq = "faq",
+  notification = "notification",
+}

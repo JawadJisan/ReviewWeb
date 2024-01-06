@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { userLoginSchema } from "@/lib/validator";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useState } from "react";
@@ -10,6 +11,9 @@ import { useForm } from "react-hook-form";
 import { FiGithub } from "react-icons/fi";
 import { SlSocialGoogle } from "react-icons/sl";
 import * as z from "zod";
+import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
+
 import {
   Form,
   FormControl,
@@ -20,16 +24,49 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { useSignInMutation } from "@/redux/api/authAPI";
+import { storeUserInfo } from "@/utils/auth.service";
 
 export default function Component() {
+  const [errorMessage, setErrorMessage] = useState("");
+  const [signIn, { isLoading }] = useSignInMutation();
   const [showPassword, setShowPassword] = useState(false);
+  const { toast } = useToast();
+  // const router = useRouter();
 
   const form = useForm<z.infer<typeof userLoginSchema>>({
     resolver: zodResolver(userLoginSchema),
   });
 
+  const router = useRouter();
+
   async function onSubmit(values: z.infer<typeof userLoginSchema>) {
-    console.log(values, "Login Form Values");
+    try {
+      const res = await signIn(values).unwrap();
+      storeUserInfo({ accessToken: res?.data?.accessToken });
+
+      if (res?.data?.accessToken) {
+        router.push("/");
+        // const { role } = getUserInfo() as any;
+        // message.success("User logged in successfully");
+        // if (role === "customer") {
+        //   router.push("/my-profile");
+        // }
+        // if (role === "admin") {
+        //   router.push("/admin/myProfile");
+        // }
+        // if (role === "super_admin") {
+        //   router.push("/super-admin/my-profile");
+        // }
+        // if (role === "team_member") {
+        //   router.push("/team-member/my-profile");
+        // }
+      }
+
+      // console.log(res, "userResponse");
+    } catch (error) {
+      setErrorMessage(error?.message);
+    }
   }
 
   const togglePasswordVisibility = () => {
@@ -87,6 +124,11 @@ export default function Component() {
                 </FormItem>
               )}
             />
+            {errorMessage && (
+              <div className="mt-4 text-center">
+                <span className="text-sm text-destructive">{errorMessage}</span>
+              </div>
+            )}
             <Button
               type="submit"
               disabled={form.formState.isSubmitting}
@@ -97,7 +139,7 @@ export default function Component() {
           </form>
         </Form>
         <div className="mt-4 text-center">
-          <span className="text-sm text-gray-500">Don't have an account?</span>{" "}
+          <span className="text-sm text-gray-500">Don't have an account?</span>
           <Link
             className="text-sm text-blue-600 hover:underline"
             href="/auth/signUp"
