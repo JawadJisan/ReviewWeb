@@ -6,16 +6,16 @@ export default function Component() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 p-4">
       <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
-        <h2 className="text-xl font-semibold">Create your account</h2>
+        <h2 className="text-xl font-semibold">Log into your account</h2>
         <p className="mt-2 text-sm text-gray-600">to continue to ReviewWeb</p>
         <div className="mt-6">
           <Button className="mb-3 w-full" variant="outline">
             <GithubIcon className="mr-2 h-5 w-5" />
-            Continue with GitHub{"\n              "}
+            Continue with GitHub{"\n                  "}
           </Button>
           <Button className="w-full" variant="outline">
             <ChromeIcon className="mr-2 h-5 w-5" />
-            Continue with Google{"\n              "}
+            Continue with Google{"\n                  "}
           </Button>
         </div>
         <div className="my-6 flex items-center justify-center">
@@ -28,21 +28,17 @@ export default function Component() {
             <Input placeholder="Username" type="text" value="johndoe" />
           </div>
           <div>
-            <Input
-              placeholder="Email address"
-              type="email"
-              value="john@example.com"
-            />
-          </div>
-          <div>
             <Input placeholder="Password" type="password" value="password123" />
           </div>
-          <Button className="w-full">CONTINUE</Button>
+          <Button className="w-full">LOG IN</Button>
         </form>
         <div className="mt-4 text-center">
-          <span className="text-sm text-gray-500">Have an account?</span>{" "}
-          <Link className="text-sm text-blue-600 hover:underline" href="#">
-            Sign in
+          <span className="text-sm text-gray-500">Don't have an account?</span>{" "}
+          <Link
+            className="text-sm text-blue-600 hover:underline"
+            href="/auth/signUp"
+          >
+            Sign up
           </Link>
         </div>
       </div>
