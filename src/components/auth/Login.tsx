@@ -47,8 +47,8 @@ export default function Component() {
 
       if (res?.data?.accessToken) {
         router.push("/");
-        const { role } = getUserInfo() as any;
-        console.log(role, "userRole");
+        const userinfo = getUserInfo() as any;
+        console.log(userinfo, "userRole");
         // message.success("User logged in successfully");
         // if (role === "customer") {
         //   router.push("/my-profile");
