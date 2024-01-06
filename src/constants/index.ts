@@ -21,6 +21,26 @@ export const headerLinks = [
   },
 ];
 
+// dashboard/myListing
+export const dashboardHeaderLinks = [
+  {
+    label: "Dashboard",
+    route: "/dashboard",
+  },
+  {
+    label: "My Listing",
+    route: "/dashboard/myListing",
+  },
+  {
+    label: "Favourite",
+    route: "/dashboard/favourite",
+  },
+  {
+    label: "Account Details",
+    route: "/dashboard/accountDetails",
+  },
+];
+
 export const eventDefaultValues = {
   title: "",
   description: "",

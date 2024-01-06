@@ -169,7 +169,7 @@ const EventDetails = ({ params: { id }, searchParams }: SearchParamProps) => {
           <div>
             <h2 className="h3-semibold">Tags</h2>
             <div className="flex">
-              {data?.data?.tags?.map((tag) => (
+              {data?.data?.tags?.map((tag: any) => (
                 <Button
                   key={tag}
                   variant="default"

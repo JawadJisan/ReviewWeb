@@ -1,8 +1,8 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Rating } from "react-simple-star-rating";
 import ReactStars from "react-rating-stars-component";
+import { MdThumbUp, MdThumbDown } from "react-icons/md";
 
 export default function SubmitReview() {
   const [prosFields, setProsFields] = useState([""]);
@@ -139,7 +139,10 @@ export default function SubmitReview() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <div className="border border-green-500 rounded p-4">
-          <div className="flex items-center mb-2">{/* ... */}</div>
+          <div className="flex items-center mb-2">
+            <MdThumbUp className="text-green-500 mr-2 size-[25px]" />
+            <div className="text-sm font-medium text-gray-900">PROS</div>
+          </div>
           {prosFields.map((field, index) => (
             <div key={index} className="flex items-center mb-2">
               <CheckSquareIcon className="text-green-500 mr-2" />
@@ -166,7 +169,10 @@ export default function SubmitReview() {
           </Button>
         </div>
         <div className="border border-red-500 rounded p-4">
-          <div className="flex items-center mb-2">{/* ... */}</div>
+          <div className="flex items-center mb-2">
+            <MdThumbDown className="text-red-500 mr-2 size-[25px] " />
+            <div className="text-sm font-medium text-gray-900">CONS</div>
+          </div>
           {consFields.map((field, index) => (
             <div key={index} className="flex items-center mb-2">
               <CheckSquareIcon className="text-red-500 mr-2" />
@@ -194,7 +200,7 @@ export default function SubmitReview() {
         </div>
       </div>
       <div className="flex justify-center">
-        <Button onClick={handleSubmit} className="bg-red-500 text-white">
+        <Button onClick={handleSubmit} className="button text-white">
           Submit Review
         </Button>
       </div>

@@ -22,7 +22,6 @@ export default async function Home({ searchParams }: SearchParamProps) {
   const category = (searchParams?.category as string) || "";
 
   // const reviews = await getReviews();
-
   // console.log(reviews);
 
   const events = await getAllEvents({
