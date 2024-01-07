@@ -45,17 +45,17 @@ export const userDetailsDefaultValue = {
 };
 */
 export const userFormSchema = z.object({
-  userName: z.string(),
-  firstName: z.string(),
-  lastName: z.string(),
-  email: z.string().email(),
-  role: z.string(),
-  address: z.string(),
-  facebook: z.string(),
-  twitter: z.string(),
-  linkedIn: z.string(),
-  other: z.string(),
-  profileImageUrl: z.string(),
+  userName: z.string().optional(),
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
+  email: z.string().email().optional(),
+  role: z.string().optional(),
+  address: z.string().optional(),
+  facebook: z.string().optional(),
+  twitter: z.string().optional(),
+  linkedIn: z.string().optional(),
+  other: z.string().optional(),
+  imageUrl: z.string(),
   createdAt: z.date(),
   updatedAt: z.date(),
 });
