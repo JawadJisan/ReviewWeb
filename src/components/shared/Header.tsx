@@ -8,10 +8,7 @@ import { DropdownMenuDemo } from "../header/HeaderMenu";
 import { getUserInfo, isLoggedIn, removeUserInfo } from "@/utils/auth.service";
 const Header = () => {
   const isUserLoggedIn = isLoggedIn();
-  console.log(isUserLoggedIn, "LoginStatus");
   const { role } = getUserInfo() as any;
-  console.log(role, "The quick brown ");
-
   return (
     <header className="w-full border-b">
       <div className="wrapper flex items-center justify-between">

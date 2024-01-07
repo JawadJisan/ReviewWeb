@@ -26,7 +26,7 @@ export function DropdownMenuDemo() {
     router.push("/auth/signIn");
   };
   const userinfo = getUserInfo() as any;
-  console.log(userinfo, "userRole");
+  // console.log(userinfo, "userRole");
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
