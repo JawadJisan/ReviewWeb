@@ -32,7 +32,6 @@ export default function Component() {
   const [signIn, { isLoading }] = useSignInMutation();
   const [showPassword, setShowPassword] = useState(false);
   const { toast } = useToast();
-  // const router = useRouter();
 
   const form = useForm<z.infer<typeof userLoginSchema>>({
     resolver: zodResolver(userLoginSchema),

@@ -9,7 +9,7 @@ export const headerLinks = [
   },
   {
     label: "My Profile",
-    route: "/profile",
+    route: "/dashboard/accountDetails",
   },
   {
     label: "Blogs",
@@ -39,7 +39,79 @@ export const dashboardHeaderLinks = [
     label: "Account Details",
     route: "/dashboard/accountDetails",
   },
+  {
+    label: "Users",
+    route: "/dashboard/user",
+  },
 ];
+
+// Dashboard Role Based links
+export const roleBasedLinks: any = {
+  user: [
+    {
+      label: "My Listing",
+      route: "/dashboard/myListing",
+    },
+    {
+      label: "Favourite",
+      route: "/dashboard/favourite",
+    },
+    {
+      label: "Account Details",
+      route: "/dashboard/accountDetails",
+    },
+  ],
+  admin: [
+    {
+      label: "Users",
+      route: "/dashboard/users",
+    },
+    {
+      label: "All Blogs",
+      route: "/dashboard/allBlogs",
+    },
+    {
+      label: "All Reviews",
+      route: "/dashboard/allReviews",
+    },
+    {
+      label: "Account Details",
+      route: "/dashboard/accountDetails",
+    },
+  ],
+  moderator: [
+    {
+      label: "Pending",
+      route: "/dashboard/pending",
+    },
+    {
+      label: "Reviews",
+      route: "/dashboard/allReviews",
+    },
+    {
+      label: "Listing Product",
+      route: "/dashboard/listingProduct",
+    },
+    {
+      label: "Account Details",
+      route: "/dashboard/accountDetails",
+    },
+  ],
+  editor: [
+    {
+      label: "Edit Review",
+      route: "/dashboard/editReview",
+    },
+    {
+      label: "Edit Blog",
+      route: "/dashboard/editBlog",
+    },
+    {
+      label: "Account Details",
+      route: "/dashboard/accountDetails",
+    },
+  ],
+};
 
 export const eventDefaultValues = {
   title: "",
