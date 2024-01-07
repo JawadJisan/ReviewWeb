@@ -19,6 +19,47 @@ export const eventFormSchema = z.object({
   url: z.string().url(),
 });
 
+// export const userFormSchema = z.object({
+//   fullName: z.string().nullable(),
+//   email: z.string().email(),
+//   role: z.string(),
+//   address: z.string().nullable(),
+//   profileImageUrl: z.string().nullable(),
+//   createdAt: z.date(),
+//   updatedAt: z.date(),
+// });
+
+/* 
+
+export const userDetailsDefaultValue = {
+  userName: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  role: "",
+  imageUrl: "",
+  address: "",
+  facebook: "",
+  twitter: "",
+  linkedIn: "",
+};
+*/
+export const userFormSchema = z.object({
+  userName: z.string(),
+  firstName: z.string(),
+  lastName: z.string(),
+  email: z.string().email(),
+  role: z.string(),
+  address: z.string(),
+  facebook: z.string(),
+  twitter: z.string(),
+  linkedIn: z.string(),
+  other: z.string(),
+  profileImageUrl: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
 export const userRegistrationSchema = z.object({
   userName: z.string().min(3, "User Name must be at least 3 characters"),
   email: z.string(),

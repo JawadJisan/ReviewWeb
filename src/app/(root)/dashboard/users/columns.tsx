@@ -75,7 +75,7 @@ export type UserType = {
 //     createdAt: '2024-01-07T06:02:39.713Z',
 //     updatedAt: '2024-01-07T06:02:39.713Z'
 //   }
-// */
+//
 
 export const columns: ColumnDef<UserType>[] = [
   {
