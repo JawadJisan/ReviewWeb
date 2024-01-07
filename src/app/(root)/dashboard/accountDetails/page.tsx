@@ -15,28 +15,30 @@ import { Input } from "@/components/ui/input";
 import { userFormSchema } from "@/lib/validator";
 import * as z from "zod";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useUploadThing } from "@/lib/uploadthing";
 import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/navigation";
 import { FileUploader } from "@/components/shared/FileUploader";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useUserQuery } from "@/redux/api/userAPI";
+import { getUserInfo, isLoggedIn } from "@/utils/auth.service";
 
-export const userDetailsDefaultValue = {
-  userName: "a",
-  firstName: "b",
-  lastName: "c",
-  email: "abc@gmail.com",
-  role: "user",
-  // imageUrl: "https://utfs.io/f/a3fa5fe0-bf76-4fcb-87f3-728f6169ce85-zc6mmm.jpg",
-  imageUrl: "",
-  address: "fas",
-  facebook: "facebook",
-  twitter: "twitter",
-  linkedIn: "linkedIn",
-  other: "other",
-};
+// export const userDetailsDefaultValue = {
+//   userName: "a",
+//   firstName: "b",
+//   lastName: "c",
+//   email: "abc@gmail.com",
+//   role: "user",
+//   // imageUrl: "https://utfs.io/f/a3fa5fe0-bf76-4fcb-87f3-728f6169ce85-zc6mmm.jpg",
+//   imageUrl: "",
+//   address: "fas",
+//   facebook: "facebook",
+//   twitter: "twitter",
+//   linkedIn: "linkedIn",
+//   other: "other",
+// };
 
 const formSchema = z.object({
   userName: z.string(),
@@ -56,19 +58,33 @@ const formSchema = z.object({
 
 const DetailsForm = () => {
   const [files, setFiles] = useState<File[]>([]);
-
-  // const initialValues =
-  //   event && type === "Update"
-  //     ? {
-  //         ...event,
-  //         startDateTime: new Date(event.startDateTime),
-  //         endDateTime: new Date(event.endDateTime),
-  //       }
-  //     : userDetailsDefaultValue;
-
+  const isUserLoggedIn = isLoggedIn();
+  const { userId } = getUserInfo();
+  const { data, isLoading } = useUserQuery(userId);
+  console.log(data, "full details");
+  console.log(data?.data?.userName);
   const router = useRouter();
-
   const { startUpload } = useUploadThing("imageUploader");
+
+  // if (isLoading || !data?.data) {
+  //   // You can render a loading indicator while waiting for data
+  //   return <p>Loading...</p>;
+  // }
+
+  const userDetailsDefaultValue = {
+    userName: data?.data?.userName,
+    firstName: "b",
+    lastName: "c",
+    email: "abc@gmail.com",
+    role: "user",
+    // imageUrl: "https://utfs.io/f/a3fa5fe0-bf76-4fcb-87f3-728f6169ce85-zc6mmm.jpg",
+    imageUrl: "",
+    address: "fas",
+    facebook: "facebook",
+    twitter: "twitter",
+    linkedIn: "linkedIn",
+    other: "other",
+  };
 
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: userDetailsDefaultValue,
@@ -91,6 +107,20 @@ const DetailsForm = () => {
     console.log(files, "files");
   }
 
+  useEffect(() => {
+    if (!isLoading && !data?.data) {
+      router.push("/");
+    }
+    // if (isLoading || !data?.data) {
+    //   // You can render a loading indicator while waiting for data
+    //   <p>Loading...</p>;
+    // }
+  }, [data, isLoading, router]);
+
+  if (isLoading || !data?.data) {
+    // You can render a loading indicator while waiting for data
+    return <p>Loading...</p>;
+  }
   return (
     // <div className="wrapper my-8 flex h-screen flex-col ">
     <Form {...form}>
@@ -163,6 +193,7 @@ const DetailsForm = () => {
                     placeholder="User Name"
                     {...field}
                     className="input-field"
+                    // value={data?.data?.userName}
                   />
                 </FormControl>
                 <FormMessage />
