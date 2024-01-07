@@ -20,7 +20,7 @@ export const eventFormSchema = z.object({
 });
 
 export const userRegistrationSchema = z.object({
-  name: z.string().min(5, "Name must be at least 5 characters"),
+  userName: z.string().min(3, "User Name must be at least 3 characters"),
   email: z.string(),
   password: z.string().min(6, "password must be 6 words/numbers"),
 });

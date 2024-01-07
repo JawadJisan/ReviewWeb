@@ -16,7 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { removeUserInfo } from "@/utils/auth.service";
+import { getUserInfo, removeUserInfo } from "@/utils/auth.service";
 import { authKey } from "@/constants/global";
 
 export function DropdownMenuDemo() {
@@ -25,6 +25,8 @@ export function DropdownMenuDemo() {
     removeUserInfo(authKey);
     router.push("/auth/signIn");
   };
+  const userinfo = getUserInfo() as any;
+  console.log(userinfo, "userRole");
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

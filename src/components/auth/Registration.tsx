@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,16 +21,26 @@ import { useState } from "react";
 import { FiGithub } from "react-icons/fi";
 import { SlSocialGoogle } from "react-icons/sl";
 import { BiShowAlt, BiHide } from "react-icons/bi";
+import { useSignUpMutation } from "../../redux/api/authAPI";
 
 export default function Component() {
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [signUp, { isLoading }] = useSignUpMutation();
 
   const form = useForm<z.infer<typeof userRegistrationSchema>>({
     resolver: zodResolver(userRegistrationSchema),
   });
-
+  const router = useRouter();
   async function onSubmit(values: z.infer<typeof userRegistrationSchema>) {
     console.log(values, "Form Values");
+    try {
+      const res = await signUp(values).unwrap();
+      console.log(res, "signUp response");
+      router.push("/auth/signIn");
+    } catch (error) {
+      setErrorMessage(error?.message);
+    }
   }
 
   const togglePasswordVisibility = () => {
@@ -66,7 +77,7 @@ export default function Component() {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
               control={form.control}
-              name="name"
+              name="userName"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
@@ -117,6 +128,11 @@ export default function Component() {
                 </FormItem>
               )}
             />
+            {errorMessage && (
+              <div className="mt-4 text-center">
+                <span className="text-sm text-destructive">{errorMessage}</span>
+              </div>
+            )}
 
             <Button
               type="submit"
