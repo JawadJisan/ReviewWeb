@@ -22,7 +22,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/navigation";
 import { FileUploader } from "@/components/shared/FileUploader";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useUserQuery } from "@/redux/api/userAPI";
+import { useUpdateUserMutation, useUserQuery } from "@/redux/api/userAPI";
 import { getUserInfo, isLoggedIn } from "@/utils/auth.service";
 
 // export const userDetailsDefaultValue = {
@@ -31,7 +31,6 @@ import { getUserInfo, isLoggedIn } from "@/utils/auth.service";
 //   lastName: "c",
 //   email: "abc@gmail.com",
 //   role: "user",
-//   // imageUrl: "https://utfs.io/f/a3fa5fe0-bf76-4fcb-87f3-728f6169ce85-zc6mmm.jpg",
 //   imageUrl: "",
 //   address: "fas",
 //   facebook: "facebook",
@@ -61,15 +60,9 @@ const DetailsForm = () => {
   const isUserLoggedIn = isLoggedIn();
   const { userId } = getUserInfo();
   const { data, isLoading } = useUserQuery(userId);
-  console.log(data, "full details");
-  console.log(data?.data?.userName);
+
   const router = useRouter();
   const { startUpload } = useUploadThing("imageUploader");
-
-  // if (isLoading || !data?.data) {
-  //   // You can render a loading indicator while waiting for data
-  //   return <p>Loading...</p>;
-  // }
 
   const userDetailsDefaultValue = {
     userName: data?.data?.userName,
@@ -77,7 +70,6 @@ const DetailsForm = () => {
     lastName: "c",
     email: "abc@gmail.com",
     role: "user",
-    // imageUrl: "https://utfs.io/f/a3fa5fe0-bf76-4fcb-87f3-728f6169ce85-zc6mmm.jpg",
     imageUrl: "",
     address: "fas",
     facebook: "facebook",
@@ -86,8 +78,12 @@ const DetailsForm = () => {
     other: "other",
   };
 
+  const [updateUser] = useUpdateUserMutation();
+
   const form = useForm<z.infer<typeof formSchema>>({
-    defaultValues: userDetailsDefaultValue,
+    defaultValues: {
+      imageUrl: data?.data?.imageUrl,
+    },
     // resolver: zodResolver(formSchema),
   });
 
@@ -102,19 +98,22 @@ const DetailsForm = () => {
       }
       uploadedImageUrl = uploadedImages[0].url;
     }
-
     console.log(uploadedImageUrl, "uploadedImageUrl");
     console.log(files, "files");
+    try {
+      const res = await updateUser({
+        id: userId,
+        body: values,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
     if (!isLoading && !data?.data) {
       router.push("/");
     }
-    // if (isLoading || !data?.data) {
-    //   // You can render a loading indicator while waiting for data
-    //   <p>Loading...</p>;
-    // }
   }, [data, isLoading, router]);
 
   if (isLoading || !data?.data) {
@@ -140,6 +139,7 @@ const DetailsForm = () => {
               <FormItem className="w-full">
                 <FormControl>
                   <Input
+                    defaultValue={data?.data?.firstName}
                     placeholder="First Name"
                     {...field}
                     className="input-field"
@@ -156,6 +156,7 @@ const DetailsForm = () => {
               <FormItem className="w-full">
                 <FormControl>
                   <Input
+                    defaultValue={data?.data?.lastName}
                     placeholder="Last Name"
                     {...field}
                     className="input-field"
@@ -174,6 +175,7 @@ const DetailsForm = () => {
               <FormItem className="w-full">
                 <FormControl>
                   <Input
+                    defaultValue={data?.data?.role}
                     placeholder="User Role"
                     {...field}
                     className="input-field"
@@ -190,6 +192,7 @@ const DetailsForm = () => {
               <FormItem className="w-full">
                 <FormControl>
                   <Input
+                    defaultValue={data?.data?.userName}
                     placeholder="User Name"
                     {...field}
                     className="input-field"
@@ -217,6 +220,7 @@ const DetailsForm = () => {
                     />
 
                     <Input
+                      defaultValue={data?.data?.email}
                       placeholder="Email"
                       {...field}
                       className="input-field"
@@ -237,6 +241,7 @@ const DetailsForm = () => {
               <FormItem className="w-full">
                 <FormControl className="h-72">
                   <Textarea
+                    defaultValue={data?.data?.address}
                     placeholder="Address"
                     {...field}
                     className="textarea rounded-2xl"
@@ -337,6 +342,7 @@ const DetailsForm = () => {
                     />
 
                     <Input
+                      defaultValue={data?.data?.facebook}
                       placeholder="Facebook"
                       {...field}
                       className="input-field"
@@ -362,6 +368,7 @@ const DetailsForm = () => {
                     />
 
                     <Input
+                      defaultValue={data?.data?.linkedIn}
                       placeholder="LinkedIn"
                       {...field}
                       className="input-field"
@@ -389,6 +396,7 @@ const DetailsForm = () => {
                     />
 
                     <Input
+                      defaultValue={data?.data?.twitter}
                       placeholder="Twitter"
                       {...field}
                       className="input-field"
@@ -414,6 +422,7 @@ const DetailsForm = () => {
                     />
 
                     <Input
+                      defaultValue={data?.data?.other}
                       placeholder="Other URL"
                       {...field}
                       className="input-field"

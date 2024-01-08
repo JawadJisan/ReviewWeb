@@ -18,7 +18,7 @@ export const listingProductAPi = baseApi.injectEndpoints({
       },
       //   providesTags: [tagTypes.availableService],
     }),
-    addListingReview: builder.mutation({
+    addListingProductReview: builder.mutation({
       query: (data) => ({
         url: `${LISTINGPRODUCT}`,
         method: "POST",
@@ -38,5 +38,8 @@ export const listingProductAPi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetListingProductQuery, useGetSingleReviewQuery } =
-  listingProductAPi;
+export const {
+  useGetListingProductQuery,
+  useGetSingleReviewQuery,
+  useAddListingProductReviewMutation,
+} = listingProductAPi;
