@@ -1,4 +1,5 @@
 "use client";
+import Tiptap from "@/components/shared/Tiptap";
 import { getUserInfo, isLoggedIn } from "@/utils/auth.service";
 import React from "react";
 
@@ -9,7 +10,11 @@ const page = () => {
   // const { role } = getUserInfo() as any;
   const uInfo = getUserInfo() as any;
   console.log(uInfo, "The quick brown ");
-  return <div>Blogs</div>;
+  return (
+    <div>
+      <Tiptap />
+    </div>
+  );
 };
 
 export default page;

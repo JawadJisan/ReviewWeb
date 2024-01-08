@@ -10,8 +10,10 @@ export default function RootLayout({
   return (
     <div className="flex h-screen flex-col">
       <Header />
-      <main className="flex-1">{children}</main>
-      <Toaster />
+      <main className="flex-1">
+        <Toaster />
+        {children}
+      </main>
       <Footer />
     </div>
   );

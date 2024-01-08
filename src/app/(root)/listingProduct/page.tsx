@@ -9,8 +9,8 @@ export default function ListingProduct() {
     <>
       <div>ListingProduct</div>
       {data?.listingProducts[0]?.title}
-      {data?.listingProducts?.map((l) => (
-        <p> {l.title} </p>
+      {data?.listingProducts?.map((l: any) => (
+        <p key={l.id}> {l.title} </p>
       ))}
     </>
   );
