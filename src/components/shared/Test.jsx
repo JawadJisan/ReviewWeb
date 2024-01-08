@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { MdCheckBox } from "react-icons/md";
 
 export default function SubmitReview() {
   const [prosFields, setProsFields] = useState([""]);
@@ -53,7 +54,7 @@ export default function SubmitReview() {
           <div className="flex items-center mb-2">{/* ... */}</div>
           {prosFields.map((field, index) => (
             <div key={index} className="flex items-center mb-2">
-              <CheckSquareIcon className="text-green-500 mr-2" />
+              <MdCheckBox className="text-green-500 mr-2" />
               <Input
                 value={field}
                 placeholder="Write here!"

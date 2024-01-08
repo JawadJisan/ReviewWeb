@@ -1,10 +1,11 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
-
-// module.exports = nextConfig
-
 module.exports = {
   images: {
-    domains: ["localhost", "hips.hearstapps.com"], // Add the localhost domain
+    domains: [
+      "localhost",
+      "hips.hearstapps.com",
+      "https://utfs.io",
+      "utfs.io",
+      "images.remotePatterns",
+    ], // Add the localhost domain
   },
 };

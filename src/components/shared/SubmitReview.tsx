@@ -1,3 +1,4 @@
+"use client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -22,7 +23,7 @@ export default function SubmitReview() {
     });
   };
 
-  const handleAddField = (type) => {
+  const handleAddField = (type: any) => {
     if (type === "pros") {
       setProsFields([...prosFields, ""]);
     } else if (type === "cons") {
@@ -30,7 +31,7 @@ export default function SubmitReview() {
     }
   };
 
-  const handleRemoveField = (index, type) => {
+  const handleRemoveField = (index, type: any) => {
     if (type === "pros") {
       const newProsFields = [...prosFields];
       newProsFields.splice(index, 1);
@@ -74,10 +75,9 @@ export default function SubmitReview() {
         <a className="text-blue-600" href="#">
           Edit your profile
         </a>
-        .{" "}
         <a className="text-blue-600" href="#">
           Log out?
-        </a>{" "}
+        </a>
         Required fields are marked <span className="text-red-500">*</span>
       </div>
       <div className="mb-4">
@@ -102,7 +102,9 @@ export default function SubmitReview() {
           <div className="text-sm font-medium text-gray-900 mr-2">Quality </div>
           <ReactStars
             count={5}
-            onChange={(newRating) => ratingChanged(newRating, "qualityRating")}
+            onChange={(newRating: any) =>
+              ratingChanged(newRating, "qualityRating")
+            }
             size={30}
             // isHalf={true}
             emptyIcon={<i className="far fa-star"></i>}
@@ -115,7 +117,9 @@ export default function SubmitReview() {
           <div className="text-sm font-medium text-gray-900 mr-2">Price</div>
           <ReactStars
             count={5}
-            onChange={(newRating) => ratingChanged(newRating, "priceRating")}
+            onChange={(newRating: any) =>
+              ratingChanged(newRating, "priceRating")
+            }
             size={30}
             emptyIcon={<i className="far fa-star"></i>}
             halfIcon={<i className="fa fa-star-half-alt"></i>}
@@ -127,7 +131,9 @@ export default function SubmitReview() {
           <div className="text-sm font-medium text-gray-900 mr-2">Service</div>
           <ReactStars
             count={5}
-            onChange={(newRating) => ratingChanged(newRating, "serviceRating")}
+            onChange={(newRating: any) =>
+              ratingChanged(newRating, "serviceRating")
+            }
             size={30}
             // isHalf={true}
             emptyIcon={<i className="far fa-star"></i>}
@@ -208,7 +214,7 @@ export default function SubmitReview() {
   );
 }
 
-function CheckSquareIcon(props) {
+function CheckSquareIcon(props: any) {
   return (
     <svg
       {...props}
@@ -224,44 +230,6 @@ function CheckSquareIcon(props) {
     >
       <polyline points="9 11 12 14 22 4" />
       <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-    </svg>
-  );
-}
-
-function SquareIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect width="18" height="18" x="3" y="3" rx="2" />
-    </svg>
-  );
-}
-
-function StarIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
     </svg>
   );
 }

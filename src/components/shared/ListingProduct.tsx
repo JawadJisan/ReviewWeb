@@ -9,8 +9,8 @@ const ListingProduct = () => {
   return (
     <>
       <div>ListingProduct</div>
-      {data?.listingProducts?.map((l) => (
-        <p> {l.title} </p>
+      {data?.listingProducts?.map((list: any) => (
+        <p key={list.id}> {list.title} </p>
       ))}
     </>
   );
