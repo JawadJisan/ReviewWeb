@@ -1,22 +1,19 @@
-import { AvatarImage, Avatar } from "@/components/ui/avatar";
+import { AvatarImage, Avatar, AvatarFallback } from "@/components/ui/avatar";
 
-export default function ReviewCarosel() {
+export default function ReviewCarosel({ reviewID, reviewDetails }) {
   return (
     <div className="bg-[#333] p-6 rounded-lg max-w-xl mx-auto text-white">
       <div className="flex flex-col items-center space-y-4">
-        <Avatar>
-          <AvatarImage
-            alt="Admin"
-            src="/placeholder.svg?height=100&width=100"
-          />
+        <Avatar className="cursor-pointer">
+          <AvatarImage src="https://github.com/shadcn.png" />
+          <AvatarFallback>CN</AvatarFallback>
         </Avatar>
-        <h2 className="text-xl font-semibold">Admin</h2>
-        <h3 className="text-sm font-medium">Administrator</h3>
-        <p className="text-center text-sm">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit interdum
-          dolor turpis eu tortor. Neque, adipiscing odio tempus, scelerisque.
-          Pellentesque scelerisque tellus amet adipiscing mauris augue
-        </p>
+        <h2 className="text-xl font-semibold">
+          {" "}
+          {reviewDetails?.author?.role}{" "}
+        </h2>
+        <h3 className="text-sm font-medium">{reviewDetails?.title}</h3>
+        <p className="text-center text-sm">{reviewDetails?.description}</p>
         <div className="flex space-x-2">
           <FacebookIcon className="bg-gray-700 rounded-full p-2" />
           <CrossIcon className="bg-gray-700 rounded-full p-2" />

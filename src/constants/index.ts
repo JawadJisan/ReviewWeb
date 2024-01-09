@@ -53,10 +53,6 @@ export const roleBasedLinks: any = {
       route: "/dashboard/myListing",
     },
     {
-      label: "Favourite",
-      route: "/dashboard/favourite",
-    },
-    {
       label: "Account Details",
       route: "/dashboard/accountDetails",
     },

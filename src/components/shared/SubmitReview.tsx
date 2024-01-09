@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import { MdThumbUp, MdThumbDown } from "react-icons/md";
+import { usePostReviewMutation } from "@/redux/api/listingProductAPI";
 
-export default function SubmitReview() {
+export default function SubmitReview({ productId, userId }) {
   const [prosFields, setProsFields] = useState([""]);
   const [consFields, setConsFields] = useState([""]);
   const [review, setReview] = useState("");
+  const [postReview] = usePostReviewMutation();
 
   const [ratings, setRatings] = useState({
     qualityRating: 0,
@@ -62,42 +64,53 @@ export default function SubmitReview() {
       pros: prosFields,
       cons: consFields,
     };
-    console.log("Form Data", formData);
+    const finalData = {
+      title: "The Review",
+      description: review,
+      rating: 5,
+      userId: userId,
+      productId: productId,
+      other: formData,
+    };
+
+    postReview(finalData);
   };
 
   return (
     <div className="max-w-4xl bg-primary-50 mt-5 rounded-3xl mb-5 wrapper mx-auto p-5">
-      <div className="text-lg font-semibold mb-4">
-        Leave feedback about this
+      <div className="pl-5 pr-5">
+        <div className="text-lg font-semibold mb-4">
+          Leave feedback about this
+        </div>
+        <div className="text-sm mb-4">
+          Logged in as abc abc.
+          <a className="text-blue-600" href="#">
+            Edit your profile
+          </a>
+          <a className="text-blue-600" href="#">
+            Log out?{" "}
+          </a>
+          Required fields are marked <span className="text-red-500">*</span>
+        </div>
+        <div className="mb-4">
+          <label
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            htmlFor="review"
+          >
+            Write your review
+            <span className="text-red-500">*</span>
+          </label>
+          <textarea
+            value={review}
+            onChange={(e) => setReview(e.target.value)}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+            id="review"
+            placeholder="Write your review"
+            rows="4"
+          />
+        </div>
       </div>
-      <div className="text-sm mb-4">
-        Logged in as abc abc.
-        <a className="text-blue-600" href="#">
-          Edit your profile
-        </a>
-        <a className="text-blue-600" href="#">
-          Log out?
-        </a>
-        Required fields are marked <span className="text-red-500">*</span>
-      </div>
-      <div className="mb-4">
-        <label
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          htmlFor="review"
-        >
-          Write your review
-          <span className="text-red-500">*</span>
-        </label>
-        <textarea
-          value={review}
-          onChange={(e) => setReview(e.target.value)}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-          id="review"
-          placeholder="Write your review"
-          rows="4"
-        />
-      </div>
-      <div className="mb-4">
+      <div className="mb-4 pl-5 pr-5">
         <div className="flex items-center mb-1">
           <div className="text-sm font-medium text-gray-900 mr-2">Quality </div>
           <ReactStars
@@ -143,7 +156,7 @@ export default function SubmitReview() {
           />
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-1 pl-5 pr-5 md:grid-cols-2 gap-4 mb-4">
         <div className="border border-green-500 rounded p-4">
           <div className="flex items-center mb-2">
             <MdThumbUp className="text-green-500 mr-2 size-[25px]" />

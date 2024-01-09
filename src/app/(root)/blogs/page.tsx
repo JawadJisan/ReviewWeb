@@ -1,4 +1,5 @@
 "use client";
+import ReactQuillText from "@/components/shared/TextEditor";
 import Tiptap from "@/components/shared/Tiptap";
 import { getUserInfo, isLoggedIn } from "@/utils/auth.service";
 import React from "react";
@@ -12,7 +13,8 @@ const page = () => {
   console.log(uInfo, "The quick brown ");
   return (
     <div>
-      <Tiptap />
+      {/* <Tiptap /> */}
+      <ReactQuillText />
     </div>
   );
 };

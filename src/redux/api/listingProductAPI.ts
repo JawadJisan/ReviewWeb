@@ -27,6 +27,24 @@ export const listingProductAPi = baseApi.injectEndpoints({
 
       // invalidatesTags: [tagTypes.availableService],
     }),
+    postReview: builder.mutation({
+      query: (data) => ({
+        url: "/reviewAndRating",
+        method: "POST",
+        data,
+      }),
+
+      // invalidatesTags: [tagTypes.availableService],
+    }),
+    updateListingProduct: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/LISTINGPRODUCT/${id}`,
+        method: "PATCH",
+        data,
+      }),
+
+      // invalidatesTags: [tagTypes.availableService],
+    }),
     // get single by id
     getSingleReview: builder.query({
       query: (id) => ({
@@ -35,6 +53,21 @@ export const listingProductAPi = baseApi.injectEndpoints({
       }),
       // providesTags: [tagTypes.availableService],
     }),
+    // get single by id
+    getAllReviews: builder.query({
+      query: () => ({
+        url: `/reviewAndRating`,
+        method: "GET",
+      }),
+      // providesTags: [tagTypes.availableService],
+    }),
+    deleteListingProduct: builder.mutation({
+      query: (id) => ({
+        url: `${LISTINGPRODUCT}/${id}`,
+        method: "DELETE",
+      }),
+      //   invalidatesTags: [tagTypes.user],
+    }),
   }),
 });
 
@@ -42,4 +75,8 @@ export const {
   useGetListingProductQuery,
   useGetSingleReviewQuery,
   useAddListingProductReviewMutation,
+  useGetAllReviewsQuery,
+  usePostReviewMutation,
+  useDeleteListingProductMutation,
+  useUpdateListingProductMutation,
 } = listingProductAPi;

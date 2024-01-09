@@ -25,20 +25,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useUpdateUserMutation, useUserQuery } from "@/redux/api/userAPI";
 import { getUserInfo, isLoggedIn } from "@/utils/auth.service";
 
-// export const userDetailsDefaultValue = {
-//   userName: "a",
-//   firstName: "b",
-//   lastName: "c",
-//   email: "abc@gmail.com",
-//   role: "user",
-//   imageUrl: "",
-//   address: "fas",
-//   facebook: "facebook",
-//   twitter: "twitter",
-//   linkedIn: "linkedIn",
-//   other: "other",
-// };
-
 const formSchema = z.object({
   userName: z.string(),
   firstName: z.string(),

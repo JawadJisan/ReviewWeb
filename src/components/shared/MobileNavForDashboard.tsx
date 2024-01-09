@@ -1,11 +1,4 @@
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Image from "next/image";
 import { Separator } from "../ui/separator";
 import DashboardNavItems from "./DashboardNavItems";
@@ -27,12 +20,6 @@ const MobileNavForDashboard = () => {
           side="left"
           className="flex flex-col gap-6 bg-white md:hidden"
         >
-          {/* <Image
-            src="/assets/images/logo.svg"
-            alt="logo"
-            width={128}
-            height={38}
-          /> */}
           <Separator className="border border-gray-50" />
           <DashboardNavItems />
         </SheetContent>

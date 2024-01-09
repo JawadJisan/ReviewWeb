@@ -9,7 +9,7 @@ import Image from "next/image";
 
 export default function ReviewedBy() {
   return (
-    <div className="max-w-4xl mt-5 wrapper mx-auto p-6 bg-primary-50 rounded-lg shadow">
+    <div className="max-w-4xl mt-5 wrapper mx-auto p-6 bg-primary-50 rounded-lg ">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold">Reviewed by 1 user</h2>
         <div className="flex space-x-2">

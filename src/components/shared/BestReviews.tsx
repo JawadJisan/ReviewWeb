@@ -125,7 +125,7 @@ export default function BestReviews() {
             </Link>
           </div>
         </div>
-        <div className="mb-6 mt-6">
+        <div className="mt-6">
           <h2 className="text-xl font-semibold mb-4">Daily Newsletter</h2>
           <div className="flex flex-col space-y-2">
             <Input placeholder="Please enter your e-mail" type="email" />

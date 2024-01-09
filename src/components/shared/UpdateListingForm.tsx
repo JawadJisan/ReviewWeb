@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useUploadThing } from "@/lib/uploadthing";
 import "react-datepicker/dist/react-datepicker.css";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { FileUploader } from "@/components/shared/FileUploader";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useUpdateUserMutation, useUserQuery } from "@/redux/api/userAPI";
@@ -34,7 +34,10 @@ import {
 } from "@/components/ui/select";
 import { toast } from "@/components/ui/use-toast";
 import { useGetCategoryQuery } from "@/redux/api/reviewCategoryAPI";
-import { useAddListingProductReviewMutation } from "@/redux/api/listingProductAPI";
+import {
+  useAddListingProductReviewMutation,
+  useUpdateListingProductMutation,
+} from "@/redux/api/listingProductAPI";
 
 const listingFormSchema = z.object({
   title: z.string(),
@@ -64,7 +67,8 @@ const listingFormSchema = z.object({
   gitHub: z.string().url(),
 });
 
-const ListingForm = () => {
+const ListingForm = ({ detailsData }: any) => {
+  const params = useParams<{ tag: string; item: string }>();
   const [files, setFiles] = useState<File[]>([]);
   const isUserLoggedIn = isLoggedIn();
   const { userId } = getUserInfo();
@@ -72,21 +76,12 @@ const ListingForm = () => {
   const router = useRouter();
   const { startUpload } = useUploadThing("imageUploader");
   const [updateUser] = useUpdateUserMutation();
-
-  const [addListingProductReview] = useAddListingProductReviewMutation();
-
+  const [updateListingProduct] = useUpdateListingProductMutation();
   const { data: categories, isLoading: categoriesLoading } =
     useGetCategoryQuery();
-  const form = useForm<z.infer<typeof listingFormSchema>>({
-    // defaultValues: {
-    //   imageUrl: data?.data?.imageUrl,
-    // },
-    // resolver: zodResolver(formSchema),
-  });
-
+  const form = useForm<z.infer<typeof listingFormSchema>>({});
   const [tagsFields, setTagsFields] = useState([""]);
   const [amenitiesFields, setAmenitiesFields] = useState([""]);
-
   const handleAddField = (type: any) => {
     if (type === "tags") {
       setTagsFields([...tagsFields, ""]);
@@ -94,7 +89,6 @@ const ListingForm = () => {
       setAmenitiesFields([...amenitiesFields, ""]);
     }
   };
-
   const handleRemoveField = (index, type) => {
     if (type === "tags") {
       const newProsFields = [...tagsFields];
@@ -106,7 +100,6 @@ const ListingForm = () => {
       setAmenitiesFields(newConsFields);
     }
   };
-
   const handleFieldChange = (index, value, type) => {
     if (type === "tags") {
       const newProsFields = [...tagsFields];
@@ -118,7 +111,6 @@ const ListingForm = () => {
       setAmenitiesFields(newConsFields);
     }
   };
-
   async function onSubmit(values: z.infer<typeof listingFormSchema>) {
     let uploadedImageUrl = values.images;
     if (files.length > 0) {
@@ -150,12 +142,14 @@ const ListingForm = () => {
       tags: tagsFields,
       authorID: userId,
     };
-    console.log(finalData, "final data");
     try {
-      const res = await addListingProductReview(finalData);
+      const res = await updateListingProduct({
+        id: params.id,
+        data: finalData,
+      });
       console.log(res, "resData");
       toast({
-        description: "Yup! Your Listing was sent to moderator for Aprove",
+        description: "Yup! Update is Compleated",
       });
       router.push("/");
     } catch (error) {
@@ -163,22 +157,24 @@ const ListingForm = () => {
     }
   }
 
+  console.log(params.id, "ID");
+
   useEffect(() => {
     if (!isLoading && !data?.data) {
       router.push("/");
     }
-  }, [data, isLoading, router]);
+    if (!isUserLoggedIn) {
+      router.push("/");
+    }
+  }, [data, isLoading, router, isUserLoggedIn]);
 
   return (
-    // <div className="wrapper my-8 flex h-screen flex-col ">
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col gap-5"
       >
-        <h3 className="text-lg font-medium leading-6 text-gray-900">
-          Listing Information
-        </h3>
+        <h3 className="text-lg font-medium leading-6 text-gray-900"></h3>
         <div className="flex flex-col gap-5 md:flex-row">
           <FormField
             control={form.control}
@@ -188,7 +184,7 @@ const ListingForm = () => {
                 {/* <FormLabel>Title</FormLabel> */}
                 <FormControl>
                   <Input
-                    // defaultValue={data?.data?.firstName}
+                    defaultValue={detailsData.title}
                     placeholder="Title"
                     {...field}
                     className="input-field"
@@ -205,7 +201,7 @@ const ListingForm = () => {
               <FormItem className="w-full">
                 <FormControl>
                   <Input
-                    // defaultValue={data?.data?.lastName}
+                    defaultValue={detailsData.price}
                     placeholder="Price"
                     {...field}
                     className="input-field"
@@ -254,7 +250,7 @@ const ListingForm = () => {
               <FormItem className="w-full">
                 <FormControl>
                   <Input
-                    // defaultValue={data?.data?.userName}
+                    defaultValue={detailsData.parking}
                     placeholder="Parking"
                     {...field}
                     className="input-field"
@@ -275,7 +271,7 @@ const ListingForm = () => {
                 <FormControl>
                   <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 py-2">
                     <Input
-                      //   defaultValue={data?.data?.email}
+                      defaultValue={detailsData.management}
                       placeholder="Management"
                       {...field}
                       className="input-field"
@@ -296,7 +292,7 @@ const ListingForm = () => {
                 <FormControl>
                   <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 py-2">
                     <Input
-                      //   defaultValue={data?.data?.email}
+                      defaultValue={detailsData.videoURL}
                       placeholder="Video URL"
                       {...field}
                       className="input-field"
@@ -316,7 +312,7 @@ const ListingForm = () => {
               <FormItem className="w-full">
                 <FormControl className="h-72">
                   <Textarea
-                    // defaultValue={data?.data?.address}
+                    defaultValue={detailsData.description}
                     placeholder="Description"
                     {...field}
                     className="textarea rounded-2xl"
@@ -429,7 +425,7 @@ const ListingForm = () => {
                     />
 
                     <Input
-                      //   defaultValue={data?.data?.email}
+                      defaultValue={detailsData.email}
                       placeholder="Email"
                       {...field}
                       className="input-field"
@@ -457,7 +453,7 @@ const ListingForm = () => {
                     />
 
                     <Input
-                      //   defaultValue={data?.data?.facebook}
+                      defaultValue={detailsData.phone}
                       placeholder="Contact No"
                       {...field}
                       className="input-field"
@@ -483,7 +479,7 @@ const ListingForm = () => {
                     />
 
                     <Input
-                      //   defaultValue={data?.data?.linkedIn}
+                      defaultValue={detailsData.website}
                       placeholder="Website Link"
                       {...field}
                       className="input-field"
@@ -513,7 +509,7 @@ const ListingForm = () => {
                     />
 
                     <Input
-                      //   defaultValue={data?.data?.email}
+                      defaultValue={detailsData.address}
                       placeholder="Address"
                       {...field}
                       className="input-field"
@@ -541,7 +537,7 @@ const ListingForm = () => {
                     />
 
                     <Input
-                      //   defaultValue={data?.data?.facebook}
+                      defaultValue={detailsData.state}
                       placeholder="State"
                       {...field}
                       className="input-field"
@@ -560,7 +556,7 @@ const ListingForm = () => {
                 <FormControl>
                   <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
                     <Input
-                      //   defaultValue={data?.data?.linkedIn}
+                      defaultValue={detailsData.zipCode}
                       placeholder="Zip Code"
                       {...field}
                       className="input-field"
@@ -592,7 +588,7 @@ const ListingForm = () => {
                     />
 
                     <Input
-                      //   defaultValue={data?.data?.twitter}
+                      defaultValue={detailsData.facebook}
                       placeholder="Facebook"
                       {...field}
                       className="input-field"
@@ -618,7 +614,7 @@ const ListingForm = () => {
                     />
 
                     <Input
-                      //   defaultValue={data?.data?.other}
+                      defaultValue={detailsData.twitter}
                       placeholder="Twitter"
                       {...field}
                       className="input-field"
@@ -644,7 +640,7 @@ const ListingForm = () => {
                     />
 
                     <Input
-                      //   defaultValue={data?.data?.other}
+                      defaultValue={detailsData.gitHub}
                       placeholder="GitHub"
                       {...field}
                       className="input-field"
@@ -663,7 +659,7 @@ const ListingForm = () => {
           disabled={form.formState.isSubmitting}
           className="button col-span-2 w-full"
         >
-          {form.formState.isSubmitting ? "Submiting..." : "Submit Your Listing"}
+          {form.formState.isSubmitting ? "Updating..." : "Update Your Listing"}
         </Button>
       </form>
     </Form>
