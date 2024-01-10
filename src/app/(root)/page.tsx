@@ -12,13 +12,7 @@ import BestReviews from "@/components/shared/BestReviews";
 import Blogs from "@/components/shared/Blogs";
 // import { HomeCarousel } from "@/components/shared/HomeCarousel";
 
-async function getReviews() {
-  const result = await fetch("http://localhost:5000/api/v1/listingProduct");
-  return result.json();
-}
-
 export default async function Home({ searchParams }: SearchParamProps) {
-  const reviews = await getReviews();
   // const firstSixItems = reviews?.slice(0, 6);
   return (
     <>
