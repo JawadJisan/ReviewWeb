@@ -17,7 +17,7 @@ export const usersApi = baseApi.injectEndpoints({
           meta: response.meta,
         };
       },
-      //   providesTags: [tagTypes.user],
+      providesTags: [tagTypes.users],
     }),
 
     addUser: build.mutation({
@@ -45,7 +45,7 @@ export const usersApi = baseApi.injectEndpoints({
         method: "PATCH",
         data: data.body,
       }),
-      //   invalidatesTags: [tagTypes.user],
+      invalidatesTags: [tagTypes.users],
     }),
 
     // delete single by id

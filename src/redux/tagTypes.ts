@@ -1,5 +1,5 @@
 export enum tagTypes {
-  user = "user",
+  users = "users",
   serviceCategory = "service-category",
   specialization = "specialization",
   serviceTeam = "service-team",
