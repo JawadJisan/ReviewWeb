@@ -2,11 +2,11 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import ReactStars from "react-rating-stars-component";
+// import ReactStars from "react-rating-stars-component";
 import { MdThumbUp, MdThumbDown } from "react-icons/md";
 import { usePostReviewMutation } from "@/redux/api/listingProductAPI";
 
-export default function SubmitReview({ productId, userId }) {
+export default function SubmitReview({ productId, userId }: any) {
   const [prosFields, setProsFields] = useState([""]);
   const [consFields, setConsFields] = useState([""]);
   const [review, setReview] = useState("");
@@ -33,7 +33,7 @@ export default function SubmitReview({ productId, userId }) {
     }
   };
 
-  const handleRemoveField = (index, type: any) => {
+  const handleRemoveField = (index: number, type: any) => {
     if (type === "pros") {
       const newProsFields = [...prosFields];
       newProsFields.splice(index, 1);
@@ -45,7 +45,7 @@ export default function SubmitReview({ productId, userId }) {
     }
   };
 
-  const handleFieldChange = (index, value, type) => {
+  const handleFieldChange = (index: number, value: string, type: string) => {
     if (type === "pros") {
       const newProsFields = [...prosFields];
       newProsFields[index] = value;
@@ -106,11 +106,11 @@ export default function SubmitReview({ productId, userId }) {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
             id="review"
             placeholder="Write your review"
-            rows="4"
+            // rows="4"
           />
         </div>
       </div>
-      <div className="mb-4 pl-5 pr-5">
+      {/* <div className="mb-4 pl-5 pr-5">
         <div className="flex items-center mb-1">
           <div className="text-sm font-medium text-gray-900 mr-2">Quality </div>
           <ReactStars
@@ -155,7 +155,7 @@ export default function SubmitReview({ productId, userId }) {
             activeColor="#ffd700"
           />
         </div>
-      </div>
+      </div> */}
       <div className="grid grid-cols-1 pl-5 pr-5 md:grid-cols-2 gap-4 mb-4">
         <div className="border border-green-500 rounded p-4">
           <div className="flex items-center mb-2">

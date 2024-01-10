@@ -67,7 +67,9 @@ const listingFormSchema = z.object({
 const ListingForm = () => {
   const [files, setFiles] = useState<File[]>([]);
   const isUserLoggedIn = isLoggedIn();
-  const { userId } = getUserInfo();
+  // const { userId } = getUserInfo();
+  const userInfo = getUserInfo() as { userId: string };
+  const { userId } = userInfo;
   const { data, isLoading } = useUserQuery(userId);
   const router = useRouter();
   const { startUpload } = useUploadThing("imageUploader");
@@ -76,7 +78,7 @@ const ListingForm = () => {
   const [addListingProductReview] = useAddListingProductReviewMutation();
 
   const { data: categories, isLoading: categoriesLoading } =
-    useGetCategoryQuery();
+    useGetCategoryQuery({});
   const form = useForm<z.infer<typeof listingFormSchema>>({
     // defaultValues: {
     //   imageUrl: data?.data?.imageUrl,
@@ -95,7 +97,7 @@ const ListingForm = () => {
     }
   };
 
-  const handleRemoveField = (index, type) => {
+  const handleRemoveField = (index: number, type: string) => {
     if (type === "tags") {
       const newProsFields = [...tagsFields];
       newProsFields.splice(index, 1);
@@ -107,7 +109,7 @@ const ListingForm = () => {
     }
   };
 
-  const handleFieldChange = (index, value, type) => {
+  const handleFieldChange = (index: number, value: string, type: string) => {
     if (type === "tags") {
       const newProsFields = [...tagsFields];
       newProsFields[index] = value;

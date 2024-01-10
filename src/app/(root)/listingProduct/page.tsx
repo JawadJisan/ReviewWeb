@@ -3,7 +3,7 @@ import { useGetListingProductQuery } from "@/redux/api/listingProductAPI";
 import React from "react";
 
 export default function ListingProduct() {
-  const { data, isLoading } = useGetListingProductQuery();
+  const { data, isLoading } = useGetListingProductQuery({});
   console.log(data, "listingProducts");
   return (
     <>

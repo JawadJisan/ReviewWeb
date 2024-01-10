@@ -1,8 +1,8 @@
 import React from "react";
 import YouTube from "react-youtube";
 
-const VideoPlayer = ({ videoUrl }) => {
-  const getVideoId = (url) => {
+const VideoPlayer = ({ videoUrl }: any) => {
+  const getVideoId = (url: string | URL) => {
     const urlParams = new URL(url);
     return urlParams.searchParams.get("v");
   };

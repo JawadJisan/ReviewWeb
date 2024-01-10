@@ -34,7 +34,7 @@ import { MdEdit, MdDelete } from "react-icons/md";
 export default function TableDemo() {
   const { toast } = useToast();
   const { userId } = getUserInfo() as any;
-  const { data, isLoading } = useGetListingProductQuery();
+  const { data, isLoading } = useGetListingProductQuery({});
   const [deleteUser] = useDeleteListingProductMutation();
 
   const filteredData = data?.listingProducts?.filter(

@@ -1,5 +1,5 @@
 "use client";
-import { zodResolver } from "@hookform/resolvers/zod";
+
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
@@ -65,7 +65,11 @@ const listingFormSchema = z.object({
 });
 
 const ListingForm = ({ detailsData }: any) => {
-  const params = useParams<{ tag: string; item: string }>();
+  const params = useParams<{
+    id: any;
+    tag: string;
+    item: string;
+  }>();
   const [files, setFiles] = useState<File[]>([]);
   const isUserLoggedIn = isLoggedIn();
   const { userId }: any = getUserInfo();
@@ -74,7 +78,7 @@ const ListingForm = ({ detailsData }: any) => {
   const { startUpload } = useUploadThing("imageUploader");
   const [updateListingProduct] = useUpdateListingProductMutation();
   const { data: categories, isLoading: categoriesLoading } =
-    useGetCategoryQuery();
+    useGetCategoryQuery({});
   const form = useForm<z.infer<typeof listingFormSchema>>({});
   const [tagsFields, setTagsFields] = useState([""]);
   const [amenitiesFields, setAmenitiesFields] = useState([""]);
@@ -85,7 +89,7 @@ const ListingForm = ({ detailsData }: any) => {
       setAmenitiesFields([...amenitiesFields, ""]);
     }
   };
-  const handleRemoveField = (index, type) => {
+  const handleRemoveField = (index: number, type: string) => {
     if (type === "tags") {
       const newProsFields = [...tagsFields];
       newProsFields.splice(index, 1);
@@ -96,7 +100,7 @@ const ListingForm = ({ detailsData }: any) => {
       setAmenitiesFields(newConsFields);
     }
   };
-  const handleFieldChange = (index, value, type) => {
+  const handleFieldChange = (index: number, value: string, type: string) => {
     if (type === "tags") {
       const newProsFields = [...tagsFields];
       newProsFields[index] = value;
@@ -140,7 +144,7 @@ const ListingForm = ({ detailsData }: any) => {
     };
     try {
       const res = await updateListingProduct({
-        id: params.id,
+        id: params?.id,
         data: finalData,
       });
       console.log(res, "resData");
@@ -152,8 +156,6 @@ const ListingForm = ({ detailsData }: any) => {
       console.log(error, "resError");
     }
   }
-
-  console.log(params.id, "ID");
 
   useEffect(() => {
     if (!isLoading && !data?.data) {
@@ -201,6 +203,7 @@ const ListingForm = ({ detailsData }: any) => {
               <FormItem className="w-full">
                 <FormControl>
                   <Input
+                    required
                     defaultValue={detailsData?.price}
                     placeholder="Price"
                     {...field}
@@ -218,9 +221,10 @@ const ListingForm = ({ detailsData }: any) => {
             name="category"
             render={({ field }) => (
               <FormItem className="w-full ">
+                {/* <FormLabel>Status</FormLabel> */}
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value}
+                  defaultValue={detailsData.category}
                 >
                   <FormControl>
                     <SelectTrigger>
@@ -230,13 +234,13 @@ const ListingForm = ({ detailsData }: any) => {
                   <SelectContent>
                     {categories?.data.map((category: any) => (
                       <SelectItem
+                        defaultValue={detailsData?.category}
                         key={category.id}
                         value={category.categoryName}
                       >
                         {category.categoryName}
                       </SelectItem>
                     ))}
-                    {/* <SelectItem value="m@google.com">m@google.com</SelectItem> */}
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -250,6 +254,7 @@ const ListingForm = ({ detailsData }: any) => {
               <FormItem className="w-full">
                 <FormControl>
                   <Input
+                    required
                     defaultValue={detailsData?.parking}
                     placeholder="Parking"
                     {...field}
@@ -271,6 +276,7 @@ const ListingForm = ({ detailsData }: any) => {
                 <FormControl>
                   <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 py-2">
                     <Input
+                      required
                       defaultValue={detailsData?.management}
                       placeholder="Management"
                       {...field}
@@ -292,6 +298,7 @@ const ListingForm = ({ detailsData }: any) => {
                 <FormControl>
                   <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 py-2">
                     <Input
+                      required
                       defaultValue={detailsData?.videoURL}
                       placeholder="Video URL"
                       {...field}
@@ -312,6 +319,7 @@ const ListingForm = ({ detailsData }: any) => {
               <FormItem className="w-full">
                 <FormControl className="h-72">
                   <Textarea
+                    required
                     defaultValue={detailsData?.description}
                     placeholder="Description"
                     {...field}
@@ -350,6 +358,7 @@ const ListingForm = ({ detailsData }: any) => {
             {tagsFields.map((field, index) => (
               <div key={index} className="flex items-center mb-2">
                 <Input
+                  required
                   value={field}
                   placeholder="Write here!"
                   className="input-field"
@@ -381,6 +390,7 @@ const ListingForm = ({ detailsData }: any) => {
             {amenitiesFields.map((field, index) => (
               <div key={index} className="flex items-center mb-2">
                 <Input
+                  required
                   className="input-field"
                   value={field}
                   placeholder="Write here!"
@@ -425,6 +435,7 @@ const ListingForm = ({ detailsData }: any) => {
                     />
 
                     <Input
+                      required
                       defaultValue={detailsData?.email}
                       placeholder="Email"
                       {...field}
@@ -453,6 +464,7 @@ const ListingForm = ({ detailsData }: any) => {
                     />
 
                     <Input
+                      required
                       defaultValue={detailsData?.phone}
                       placeholder="Contact No"
                       {...field}
@@ -479,6 +491,7 @@ const ListingForm = ({ detailsData }: any) => {
                     />
 
                     <Input
+                      required
                       defaultValue={detailsData?.website}
                       placeholder="Website Link"
                       {...field}
@@ -509,6 +522,7 @@ const ListingForm = ({ detailsData }: any) => {
                     />
 
                     <Input
+                      required
                       defaultValue={detailsData?.address}
                       placeholder="Address"
                       {...field}
@@ -537,6 +551,7 @@ const ListingForm = ({ detailsData }: any) => {
                     />
 
                     <Input
+                      required
                       defaultValue={detailsData?.state}
                       placeholder="State"
                       {...field}
@@ -556,6 +571,7 @@ const ListingForm = ({ detailsData }: any) => {
                 <FormControl>
                   <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
                     <Input
+                      required
                       defaultValue={detailsData?.zipCode}
                       placeholder="Zip Code"
                       {...field}
@@ -588,6 +604,7 @@ const ListingForm = ({ detailsData }: any) => {
                     />
 
                     <Input
+                      required
                       defaultValue={detailsData?.facebook}
                       placeholder="Facebook"
                       {...field}
@@ -614,6 +631,7 @@ const ListingForm = ({ detailsData }: any) => {
                     />
 
                     <Input
+                      required
                       defaultValue={detailsData?.twitter}
                       placeholder="Twitter"
                       {...field}
@@ -640,6 +658,7 @@ const ListingForm = ({ detailsData }: any) => {
                     />
 
                     <Input
+                      required
                       defaultValue={detailsData?.gitHub}
                       placeholder="GitHub"
                       {...field}

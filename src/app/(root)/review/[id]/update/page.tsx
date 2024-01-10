@@ -3,14 +3,24 @@ import { useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { isLoggedIn } from "@/utils/auth.service";
 import ListingForm from "@/components/shared/UpdateListingForm";
-import { useGetSingleReviewQuery } from "@/redux/api/listingProductAPI";
+import {
+  useGetSingleListingProductQuery,
+  useGetSingleReviewQuery,
+} from "@/redux/api/listingProductAPI";
 
 const UpdateListingReview = () => {
   const router = useRouter();
-  const params = useParams<{ tag: string; item: string }>();
+  const params = useParams<{
+    id: any;
+    tag: string;
+    item: string;
+  }>();
 
-  const { data, isLoading } = useGetSingleReviewQuery(params.id);
-  console.log(data, "update details");
+  const { data: singleData, isLoading } = useGetSingleListingProductQuery(
+    params.id
+  );
+  // const { data, isLoading } = useGetSingleReviewQuery(params?.id);
+  console.log(singleData, "singleData");
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -27,7 +37,7 @@ const UpdateListingReview = () => {
         <h3 className="wrapper h3-bold text-center"></h3>
       </section>
       <div className="wrapper my-8">
-        {data && <ListingForm detailsData={data?.data} />}
+        {singleData && <ListingForm detailsData={singleData?.data} />}
       </div>
     </>
   );

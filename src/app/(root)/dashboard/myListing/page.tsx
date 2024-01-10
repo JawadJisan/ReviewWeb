@@ -37,10 +37,10 @@ import { MdEdit, MdDelete } from "react-icons/md";
 export default function TableDemo() {
   const { toast } = useToast();
   const { userId } = getUserInfo() as any;
-  const { data, isLoading } = useGetListingProductQuery();
+  const { data, isLoading } = useGetListingProductQuery({});
   const [deleteUser] = useDeleteListingProductMutation();
   const filteredData = data?.listingProducts?.filter(
-    (p) => p.authorID === userId
+    (p: any) => p.authorID === userId
   );
   const handleDelete = async (data: any) => {
     const res = await deleteUser(data.id);
@@ -50,6 +50,9 @@ export default function TableDemo() {
     });
   };
 
+  if (isLoading) {
+    return <p className="flex items-center justify-center">Loading</p>;
+  }
   const handleEdit = async (id: any) => {};
   return (
     <div className="wrapper">
@@ -67,7 +70,7 @@ export default function TableDemo() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {filteredData?.map((myData) => (
+          {filteredData?.map((myData: any) => (
             <TableRow key={myData.id}>
               <TableCell className="font-medium">
                 <Avatar className="cursor-pointer">

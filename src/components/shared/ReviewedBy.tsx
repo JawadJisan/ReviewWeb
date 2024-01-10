@@ -82,7 +82,7 @@ export default function ReviewedBy() {
   );
 }
 
-function StarIcon(props) {
+function StarIcon(props: any) {
   return (
     <svg
       {...props}

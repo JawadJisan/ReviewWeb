@@ -32,7 +32,7 @@ const EventDetails = ({ params: { id } }: SearchParamProps) => {
   const { userId } = getUserInfo() as any;
 
   const filteredReviwe = allReviewsAndRatings?.data?.filter(
-    (item) => item.productId == id
+    (item: any) => item.productId == id
   );
 
   if (isLoading || reviewLoading) {
@@ -158,7 +158,7 @@ const EventDetails = ({ params: { id } }: SearchParamProps) => {
       {filteredReviwe && filteredReviwe.length > 0 ? (
         <Carousel className="wrapper">
           <CarouselContent>
-            {filteredReviwe.map((review) => (
+            {filteredReviwe.map((review: any) => (
               <CarouselItem
                 key={review.id}
                 className="md:basis-1/2 lg:basis-3/3"

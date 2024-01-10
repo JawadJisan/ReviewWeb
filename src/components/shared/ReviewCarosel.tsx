@@ -1,6 +1,8 @@
 import { AvatarImage, Avatar, AvatarFallback } from "@/components/ui/avatar";
 
-export default function ReviewCarosel({ reviewID, reviewDetails }) {
+import { JSX, SVGProps } from "react";
+
+export default function ReviewCarosel({ reviewDetails }: any) {
   return (
     <div className="bg-[#333] p-6 rounded-lg max-w-xl mx-auto text-white">
       <div className="flex flex-col items-center space-y-4">
@@ -26,7 +28,7 @@ export default function ReviewCarosel({ reviewID, reviewDetails }) {
   );
 }
 
-function CrossIcon(props) {
+function CrossIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -45,7 +47,9 @@ function CrossIcon(props) {
   );
 }
 
-function FacebookIcon(props) {
+function FacebookIcon(
+  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
+) {
   return (
     <svg
       {...props}
@@ -64,7 +68,9 @@ function FacebookIcon(props) {
   );
 }
 
-function InstagramIcon(props) {
+function InstagramIcon(
+  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
+) {
   return (
     <svg
       {...props}
@@ -85,7 +91,9 @@ function InstagramIcon(props) {
   );
 }
 
-function LinkedinIcon(props) {
+function LinkedinIcon(
+  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
+) {
   return (
     <svg
       {...props}
@@ -106,7 +114,7 @@ function LinkedinIcon(props) {
   );
 }
 
-function PinIcon(props) {
+function PinIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}

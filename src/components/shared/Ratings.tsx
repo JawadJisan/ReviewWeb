@@ -1,3 +1,5 @@
+import { JSX, SVGProps } from "react";
+
 export default function Ratings() {
   return (
     <div className="bg-primary-50 wrapper p-4 rounded-lg">
@@ -53,7 +55,7 @@ export default function Ratings() {
   );
 }
 
-function StarHalfIcon(props) {
+function StarHalfIcon(props: any) {
   return (
     <svg
       {...props}
@@ -72,7 +74,7 @@ function StarHalfIcon(props) {
   );
 }
 
-function StarIcon(props) {
+function StarIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}

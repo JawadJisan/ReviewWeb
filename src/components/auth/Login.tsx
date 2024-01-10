@@ -63,7 +63,7 @@ export default function Component() {
         // }
       }
     } catch (error) {
-      setErrorMessage(error?.message);
+      setErrorMessage("something went wrong");
     }
   }
 

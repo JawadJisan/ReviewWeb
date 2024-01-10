@@ -79,7 +79,7 @@ const Page = () => {
 
 export default Page;
 
-function FileWarningIcon(props) {
+function FileWarningIcon(props: any) {
   return (
     <svg
       {...props}
@@ -100,7 +100,7 @@ function FileWarningIcon(props) {
   );
 }
 
-function ListIcon(props) {
+function ListIcon(props: any) {
   return (
     <svg
       {...props}
@@ -124,7 +124,7 @@ function ListIcon(props) {
   );
 }
 
-function MegaphoneIcon(props) {
+function MegaphoneIcon(props: any) {
   return (
     <svg
       {...props}
@@ -144,7 +144,7 @@ function MegaphoneIcon(props) {
   );
 }
 
-function ClockIcon(props) {
+function ClockIcon(props: any) {
   return (
     <svg
       {...props}

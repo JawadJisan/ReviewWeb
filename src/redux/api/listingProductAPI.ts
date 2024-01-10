@@ -69,6 +69,13 @@ export const listingProductAPi = baseApi.injectEndpoints({
       }),
       // providesTags: [tagTypes.availableService],
     }),
+    getSingleListingProduct: builder.query({
+      query: (id) => ({
+        url: `/listingProduct/${id}`,
+        method: "GET",
+      }),
+      // providesTags: [tagTypes.availableService],
+    }),
     deleteListingProduct: builder.mutation({
       query: (id) => ({
         url: `${LISTINGPRODUCT}/${id}`,
@@ -88,4 +95,5 @@ export const {
   useDeleteListingProductMutation,
   useUpdateListingProductMutation,
   useUpdateListingStatusMutation,
+  useGetSingleListingProductQuery,
 } = listingProductAPi;

@@ -1,6 +1,6 @@
 "use client";
 import { useGetAllReviewsQuery } from "@/redux/api/listingProductAPI";
-import React, { useEffect } from "react";
+import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,9 +13,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
 import {
   Table,
@@ -37,10 +34,9 @@ import Link from "next/link";
 
 import { MdEdit, MdDelete } from "react-icons/md";
 
-const page = () => {
+const Page = () => {
   const { data: allReviewsAndRatings, isLoading: reviewLoading } =
-    useGetAllReviewsQuery();
-  console.log(allReviewsAndRatings);
+    useGetAllReviewsQuery({});
 
   const handleDelete = async (data: any) => {
     // const res = await deleteUser(data.id);
@@ -68,7 +64,7 @@ const page = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {allReviewsAndRatings?.data?.map((review) => (
+          {allReviewsAndRatings?.data?.map((review: any) => (
             <TableRow key={review.id}>
               <TableCell className="font-medium">
                 <Avatar className="cursor-pointer">
@@ -121,4 +117,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

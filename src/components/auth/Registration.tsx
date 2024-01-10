@@ -39,7 +39,8 @@ export default function Component() {
       console.log(res, "signUp response");
       router.push("/auth/signIn");
     } catch (error) {
-      setErrorMessage(error?.message);
+      // setErrorMessage(error?.message);
+      setErrorMessage("something went wrong");
     }
   }
 

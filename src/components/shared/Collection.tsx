@@ -4,7 +4,7 @@ import Pagination from "./Pagination";
 import { useGetListingProductQuery } from "@/redux/api/listingProductAPI";
 import NewCard from "./NewCard";
 const Collection = () => {
-  const { data: reviewData, isLoading } = useGetListingProductQuery();
+  const { data: reviewData, isLoading } = useGetListingProductQuery({});
   // const firstSixItems = reviewData.slice(0, 6);
   return (
     <>
