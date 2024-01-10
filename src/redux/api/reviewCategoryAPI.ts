@@ -1,6 +1,5 @@
 import { baseApi } from "./baseApi";
 
-const LISTINGPRODUCT = "/reviewCategory";
 const REVIEWCATEGORY = "/reviewCategory";
 
 export const reviewCategoryAPI = baseApi.injectEndpoints({
@@ -15,7 +14,7 @@ export const reviewCategoryAPI = baseApi.injectEndpoints({
     }),
     addListingReview: builder.mutation({
       query: (data) => ({
-        url: `${LISTINGPRODUCT}`,
+        url: `${REVIEWCATEGORY}`,
         method: "POST",
         data,
       }),
@@ -25,7 +24,7 @@ export const reviewCategoryAPI = baseApi.injectEndpoints({
     // get single by id
     getSingleReview: builder.query({
       query: (id) => ({
-        url: `${LISTINGPRODUCT}/${id}`,
+        url: `${REVIEWCATEGORY}/${id}`,
         method: "GET",
       }),
       // providesTags: [tagTypes.availableService],

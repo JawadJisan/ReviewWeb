@@ -55,6 +55,7 @@
     "react-resizable-panels": "^1.0.7",
     "react-simple-star-rating": "^5.1.7",
     "react-youtube": "^10.1.0",
+    "recharts": "^2.10.4",
     "stripe": "^14.10.0",
     "svix": "^1.15.0",
     "tailwind-merge": "^2.2.0",

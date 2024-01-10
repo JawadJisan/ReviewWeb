@@ -27,7 +27,7 @@ const UpdateListingReview = () => {
         <h3 className="wrapper h3-bold text-center"></h3>
       </section>
       <div className="wrapper my-8">
-        <ListingForm detailsData={data.data} />
+        {data && <ListingForm detailsData={data?.data} />}
       </div>
     </>
   );

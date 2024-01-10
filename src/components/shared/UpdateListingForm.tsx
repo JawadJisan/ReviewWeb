@@ -34,10 +34,7 @@ import {
 } from "@/components/ui/select";
 import { toast } from "@/components/ui/use-toast";
 import { useGetCategoryQuery } from "@/redux/api/reviewCategoryAPI";
-import {
-  useAddListingProductReviewMutation,
-  useUpdateListingProductMutation,
-} from "@/redux/api/listingProductAPI";
+import { useUpdateListingProductMutation } from "@/redux/api/listingProductAPI";
 
 const listingFormSchema = z.object({
   title: z.string(),
@@ -71,11 +68,10 @@ const ListingForm = ({ detailsData }: any) => {
   const params = useParams<{ tag: string; item: string }>();
   const [files, setFiles] = useState<File[]>([]);
   const isUserLoggedIn = isLoggedIn();
-  const { userId } = getUserInfo();
+  const { userId }: any = getUserInfo();
   const { data, isLoading } = useUserQuery(userId);
   const router = useRouter();
   const { startUpload } = useUploadThing("imageUploader");
-  const [updateUser] = useUpdateUserMutation();
   const [updateListingProduct] = useUpdateListingProductMutation();
   const { data: categories, isLoading: categoriesLoading } =
     useGetCategoryQuery();
@@ -168,6 +164,10 @@ const ListingForm = ({ detailsData }: any) => {
     }
   }, [data, isLoading, router, isUserLoggedIn]);
 
+  if (categoriesLoading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <Form {...form}>
       <form
@@ -184,7 +184,7 @@ const ListingForm = ({ detailsData }: any) => {
                 {/* <FormLabel>Title</FormLabel> */}
                 <FormControl>
                   <Input
-                    defaultValue={detailsData.title}
+                    defaultValue={detailsData?.title}
                     placeholder="Title"
                     {...field}
                     className="input-field"
@@ -201,7 +201,7 @@ const ListingForm = ({ detailsData }: any) => {
               <FormItem className="w-full">
                 <FormControl>
                   <Input
-                    defaultValue={detailsData.price}
+                    defaultValue={detailsData?.price}
                     placeholder="Price"
                     {...field}
                     className="input-field"
@@ -250,7 +250,7 @@ const ListingForm = ({ detailsData }: any) => {
               <FormItem className="w-full">
                 <FormControl>
                   <Input
-                    defaultValue={detailsData.parking}
+                    defaultValue={detailsData?.parking}
                     placeholder="Parking"
                     {...field}
                     className="input-field"
@@ -271,7 +271,7 @@ const ListingForm = ({ detailsData }: any) => {
                 <FormControl>
                   <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 py-2">
                     <Input
-                      defaultValue={detailsData.management}
+                      defaultValue={detailsData?.management}
                       placeholder="Management"
                       {...field}
                       className="input-field"
@@ -292,7 +292,7 @@ const ListingForm = ({ detailsData }: any) => {
                 <FormControl>
                   <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 py-2">
                     <Input
-                      defaultValue={detailsData.videoURL}
+                      defaultValue={detailsData?.videoURL}
                       placeholder="Video URL"
                       {...field}
                       className="input-field"
@@ -312,7 +312,7 @@ const ListingForm = ({ detailsData }: any) => {
               <FormItem className="w-full">
                 <FormControl className="h-72">
                   <Textarea
-                    defaultValue={detailsData.description}
+                    defaultValue={detailsData?.description}
                     placeholder="Description"
                     {...field}
                     className="textarea rounded-2xl"
@@ -425,7 +425,7 @@ const ListingForm = ({ detailsData }: any) => {
                     />
 
                     <Input
-                      defaultValue={detailsData.email}
+                      defaultValue={detailsData?.email}
                       placeholder="Email"
                       {...field}
                       className="input-field"
@@ -453,7 +453,7 @@ const ListingForm = ({ detailsData }: any) => {
                     />
 
                     <Input
-                      defaultValue={detailsData.phone}
+                      defaultValue={detailsData?.phone}
                       placeholder="Contact No"
                       {...field}
                       className="input-field"
@@ -479,7 +479,7 @@ const ListingForm = ({ detailsData }: any) => {
                     />
 
                     <Input
-                      defaultValue={detailsData.website}
+                      defaultValue={detailsData?.website}
                       placeholder="Website Link"
                       {...field}
                       className="input-field"
@@ -509,7 +509,7 @@ const ListingForm = ({ detailsData }: any) => {
                     />
 
                     <Input
-                      defaultValue={detailsData.address}
+                      defaultValue={detailsData?.address}
                       placeholder="Address"
                       {...field}
                       className="input-field"
@@ -537,7 +537,7 @@ const ListingForm = ({ detailsData }: any) => {
                     />
 
                     <Input
-                      defaultValue={detailsData.state}
+                      defaultValue={detailsData?.state}
                       placeholder="State"
                       {...field}
                       className="input-field"
@@ -556,7 +556,7 @@ const ListingForm = ({ detailsData }: any) => {
                 <FormControl>
                   <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
                     <Input
-                      defaultValue={detailsData.zipCode}
+                      defaultValue={detailsData?.zipCode}
                       placeholder="Zip Code"
                       {...field}
                       className="input-field"
@@ -588,7 +588,7 @@ const ListingForm = ({ detailsData }: any) => {
                     />
 
                     <Input
-                      defaultValue={detailsData.facebook}
+                      defaultValue={detailsData?.facebook}
                       placeholder="Facebook"
                       {...field}
                       className="input-field"
@@ -614,7 +614,7 @@ const ListingForm = ({ detailsData }: any) => {
                     />
 
                     <Input
-                      defaultValue={detailsData.twitter}
+                      defaultValue={detailsData?.twitter}
                       placeholder="Twitter"
                       {...field}
                       className="input-field"
@@ -640,7 +640,7 @@ const ListingForm = ({ detailsData }: any) => {
                     />
 
                     <Input
-                      defaultValue={detailsData.gitHub}
+                      defaultValue={detailsData?.gitHub}
                       placeholder="GitHub"
                       {...field}
                       className="input-field"

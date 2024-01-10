@@ -18,6 +18,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getUserInfo, removeUserInfo } from "@/utils/auth.service";
 import { authKey } from "@/constants/global";
+import Link from "next/link";
 
 export function DropdownMenuDemo() {
   const router = useRouter();
@@ -42,14 +43,19 @@ export function DropdownMenuDemo() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            Profile
-            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+            <Link
+              href="/dashboard/accountDetails"
+              className="cursor-pointer flex justify-between items-center"
+            >
+              <p>Profile</p>
+              {/* <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut> */}
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuSeparator />
-        <DropdownMenuItem>GitHub</DropdownMenuItem>
-        <DropdownMenuItem>Support</DropdownMenuItem>
+        {/* <DropdownMenuItem>GitHub</DropdownMenuItem> */}
+        {/* <DropdownMenuItem>Support</DropdownMenuItem> */}
         <DropdownMenuSeparator />
         <DropdownMenuSeparator />
         <DropdownMenuItem className="flex items-center justify-center">

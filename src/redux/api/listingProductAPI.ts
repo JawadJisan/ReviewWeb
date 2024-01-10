@@ -1,3 +1,4 @@
+import { tagTypes } from "../tagTypes";
 import { baseApi } from "./baseApi";
 
 const LISTINGPRODUCT = "/listingProduct";
@@ -16,7 +17,7 @@ export const listingProductAPi = baseApi.injectEndpoints({
           meta: response.meta,
         };
       },
-      //   providesTags: [tagTypes.availableService],
+      providesTags: [tagTypes.getlistingProduct],
     }),
     addListingProductReview: builder.mutation({
       query: (data) => ({
@@ -38,12 +39,19 @@ export const listingProductAPi = baseApi.injectEndpoints({
     }),
     updateListingProduct: builder.mutation({
       query: ({ id, data }) => ({
-        url: `/LISTINGPRODUCT/${id}`,
+        url: `${LISTINGPRODUCT}/${id}`,
         method: "PATCH",
         data,
       }),
-
-      // invalidatesTags: [tagTypes.availableService],
+      invalidatesTags: [tagTypes.getlistingProduct],
+    }),
+    updateListingStatus: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `${LISTINGPRODUCT}/${id}/status`,
+        method: "PATCH",
+        data,
+      }),
+      invalidatesTags: [tagTypes.getlistingProduct],
     }),
     // get single by id
     getSingleReview: builder.query({
@@ -79,4 +87,5 @@ export const {
   usePostReviewMutation,
   useDeleteListingProductMutation,
   useUpdateListingProductMutation,
+  useUpdateListingStatusMutation,
 } = listingProductAPi;

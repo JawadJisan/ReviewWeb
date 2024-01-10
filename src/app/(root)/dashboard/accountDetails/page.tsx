@@ -44,7 +44,7 @@ const formSchema = z.object({
 const DetailsForm = () => {
   const [files, setFiles] = useState<File[]>([]);
   const isUserLoggedIn = isLoggedIn();
-  const { userId } = getUserInfo();
+  const { userId }: any = getUserInfo();
   const { data, isLoading } = useUserQuery(userId);
 
   const router = useRouter();

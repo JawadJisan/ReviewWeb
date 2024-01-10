@@ -14,4 +14,5 @@ export enum tagTypes {
   blog = "blog",
   faq = "faq",
   notification = "notification",
+  getlistingProduct = "getlistingProduct",
 }

@@ -191,7 +191,10 @@ export const columns: ColumnDef<UserType>[] = [
                     className="col-span-3" /> */}
                     <Select>
                       <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Select a fruit disabled" />
+                        <SelectValue
+                          placeholder="Select User Role"
+                          defaultValue={row?.original?.role}
+                        />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>

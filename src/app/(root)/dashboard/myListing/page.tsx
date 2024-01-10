@@ -30,22 +30,9 @@ import {
   useGetListingProductQuery,
 } from "@/redux/api/listingProductAPI";
 import { getUserInfo } from "@/utils/auth.service";
+import Link from "next/link";
 
 import { MdEdit, MdDelete } from "react-icons/md";
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-];
 
 export default function TableDemo() {
   const { toast } = useToast();
@@ -62,6 +49,8 @@ export default function TableDemo() {
       description: "Post Deleted Successfully",
     });
   };
+
+  const handleEdit = async (id: any) => {};
   return (
     <div className="wrapper">
       <Table>
@@ -118,7 +107,9 @@ export default function TableDemo() {
                 {myData.status === "approved" ? (
                   ""
                 ) : (
-                  <MdEdit className="w-5 h-5 ml-3" />
+                  <Link href={`review/${myData.id}/update`}>
+                    <MdEdit className="w-5 h-5 ml-3" />
+                  </Link>
                 )}
               </TableCell>
             </TableRow>

@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FiGithub } from "react-icons/fi";
+import { FiGithub, FiFacebook } from "react-icons/fi";
 import { SlSocialGoogle } from "react-icons/sl";
 import * as z from "zod";
 import { useToast } from "@/components/ui/use-toast";
@@ -83,8 +83,8 @@ export default function Component() {
         <p className="mt-2 text-sm text-gray-600">to continue to ReviewWeb</p>
         <div className="mt-6">
           <Button className="mb-3 w-full" variant="outline">
-            <FiGithub className="mr-2 h-5 w-5" />
-            Continue with GitHub{"\n                  "}
+            <FiFacebook className="mr-2 h-5 w-5" />
+            Continue with Facebook{"\n                  "}
           </Button>
           <Button className="w-full" variant="outline">
             <SlSocialGoogle className="mr-2 h-5 w-5" />
