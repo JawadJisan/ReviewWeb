@@ -11,13 +11,7 @@ import VideoPlayer from "@/components/shared/VideoPlayer";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ReviewCarosel from "@/components/shared/ReviewCarosel";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "@/components/ui/carousel";
+
 import Ratings from "@/components/shared/Ratings";
 import ReviewedBy from "@/components/shared/ReviewedBy";
 import SubmitReview from "@/components/shared/SubmitReview";
@@ -155,7 +149,7 @@ const EventDetails = ({ params: { id } }: SearchParamProps) => {
       </section>
       {/* Admin or Modarator Review Carosel */}
 
-      {filteredReviwe && filteredReviwe.length > 0 ? (
+      {/* {filteredReviwe && filteredReviwe.length > 0 ? (
         <Carousel className="wrapper">
           <CarouselContent>
             {filteredReviwe.map((review: any) => (
@@ -172,7 +166,7 @@ const EventDetails = ({ params: { id } }: SearchParamProps) => {
         <div className="text-center">
           <p className="h4-medium mb-5 font-semibold">No Reviews Found</p>
         </div>
-      )}
+      )} */}
 
       <Ratings />
       {/* <ReviewedBy /> */}

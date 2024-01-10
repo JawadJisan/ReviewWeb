@@ -10,7 +10,7 @@ import Link from "next/link";
 import ListingProduct from "@/components/shared/ListingProduct";
 import BestReviews from "@/components/shared/BestReviews";
 import Blogs from "@/components/shared/Blogs";
-import { HomeCarousel } from "@/components/shared/HomeCarousel";
+// import { HomeCarousel } from "@/components/shared/HomeCarousel";
 
 async function getReviews() {
   const result = await fetch("http://localhost:5000/api/v1/listingProduct");
@@ -37,14 +37,14 @@ export default async function Home({ searchParams }: SearchParamProps) {
             </Button>
           </div>
 
-          {/* <Image
-            src="/assets/images/heroReview.jpg"
+          <Image
+            src="https://utfs.io/f/3f73f599-f478-4527-9cf1-280b99ba052b-4r9vpn.jpg"
             alt="hero"
             width={1000}
             height={1000}
             className="max-h-[70vh] object-contain object-center 2xl:max-h-[50vh]"
-          /> */}
-          <HomeCarousel />
+          />
+          {/* <HomeCarousel /> */}
         </div>
       </section>
       <section
